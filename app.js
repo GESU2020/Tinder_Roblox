@@ -2,32 +2,39 @@
    Roblinder · App (Vanilla JS)
    ========================= */
 
-/* ====== Datos (PEOPLE con formato Astrid) ====== */
+/* ====== Datos (PEOPLE con modelo Astrid) ====== */
 const PEOPLE = [
+  // Nazli (igual)
   { id:'p1', name:'Nazli', gender:'Mujer', age:22, city:'Huancayo', role:'Participante',
     img:'https://i.pravatar.cc/1000?img=12', avatar:'https://i.pravatar.cc/120?img=12',
     tags:['Investigación','Redacción'], bio:'Le gusta el análisis y las entrevistas.',
     sign:'Libra', status:'Soltera', likes:['Viajar','Café','Fotografía']
   },
 
-  /* Gabriela → Daira (formato Astrid) */
-  { id:'p2', name:'Gabriela', gender:'Mujer', age:17, city:'Huancayo', role:'Participante',
+  // Gabriela → Daira (ya con modelo)
+  { id:'p2', name:'Daira', gender:'Mujer', age:17, city:'Huancayo', role:'Participante',
     img:'https://i.pravatar.cc/1000?img=47', avatar:'https://i.pravatar.cc/120?img=47',
     username:'leebitilin', sign:'Sagitario', career:'Medicina Humana', status:'Soltera',
     goal:'Ser una profesional exitosa y tener una familia estable',
     favFood:'Cheesecake de maracuyá',
-    bio:'Holaaa, soy Daira :] Mi signo es Sagitario, tengo 17 años y estudio Medicina Humana. Mi meta en la vida sería lograr ser una profesional exitosa y tener una familia estable. No tengo comida fav pero un postre que jamás me cansaría de comer es el cheesecake de maracuyá. Mi user en roblox es leebitilin. Estado civil: soltera 😝',
+    bio:'Holaaa, soy Daira :] Mi signo es Sagitario, tengo 17 años y estudio Medicina Humana. Mi meta en la vida sería lograr ser una profesional exitosa y tener una familia estable. Mi user en roblox es leebitilin. Estado civil: soltera 😝',
     seeks:['Honestidad','Lealtad','Compromiso'],
     tags:['Diseño','UI'], likes:['Diseño','Museos','Correr']
   },
 
-  { id:'p3', name:'Gesú', gender:'Hombre', age:23, city:'Huancayo', role:'Participante',
+  // Gesú → NUEVO (modelo Astrid)
+  { id:'p3', name:'Gesú', gender:'Hombre', age:20, city:'Huancayo', role:'Participante',
     img:'https://i.pravatar.cc/1000?img=3', avatar:'https://i.pravatar.cc/120?img=3',
-    tags:['Datos','KPIs'], bio:'Arma dashboards y revisa consistencia.',
-    sign:'Virgo', status:'Soltero', likes:['Tecnología','Ciclismo','Series']
+    username:'Nova', sign:'Aries',
+    career:'Ingeniería Empresarial de Sistemas (UCSUR)', status:'Soltero',
+    goal:'Emprender mi propio negocio',
+    favFood:'Ceviche y té de orines verdes',
+    bio:'"Soy Nova, un joven con metas claras y ganas de crecer. Me apasiona la tecnología y el mundo empresarial, pero sobre todo quiero compartir mi camino con alguien auténtico. Valoro la lealtad, el respeto y el esfuerzo por salir adelante. Si compartes esos valores, ya tenemos algo en común."',
+    seeks:['Lealtad','Valores','Respeto a sí misma','Capacidad de trabajo','Superación de retos'],
+    tags:['Datos','KPIs'], likes:['Tecnología','Ciclismo','Series']
   },
 
-  /* Neji → Pamela Cruz (formato Astrid) */
+  // Neji → Pamela (modelo Astrid) — ya lo tenías
   { id:'p4', name:'Pamela Cruz', gender:'Mujer', age:18, city:'Huancayo', role:'Participante',
     img:'https://i.pravatar.cc/1000?img=66', avatar:'https://i.pravatar.cc/120?img=66',
     username:'Imbelvr25', sign:'Tauro', career:'Medicina Humana', status:'Soltera',
@@ -38,7 +45,7 @@ const PEOPLE = [
     tags:['Documentación','Edición'], likes:['Lectura','Edición','Música']
   },
 
-  /* Abigail (formato Astrid) */
+  // Abigail (modelo Astrid) — ya lo tenías
   { id:'p5', name:'Abigail', gender:'Mujer', age:21, city:'Huancayo', role:'Participante',
     img:'https://i.pravatar.cc/1000?img=8', avatar:'https://i.pravatar.cc/120?img=8',
     username:'Arroz con leche', sign:'Aries', career:'Enfermería', status:'Soltera',
@@ -54,13 +61,14 @@ const PEOPLE = [
     tags:['Storytelling','Video'], bio:'Produce clips y limpia audio.',
     sign:'Leo', status:'Soltera', likes:['Video','Teatro','Mar']
   },
+
   { id:'p7', name:'Sebastián', gender:'Hombre', age:23, city:'Huancayo', role:'Participante',
     img:'https://i.pravatar.cc/1000?img=55', avatar:'https://i.pravatar.cc/120?img=55',
     tags:['Fullstack','Automatización'], bio:'Integra herramientas y automatiza flujos.',
     sign:'Capricornio', status:'Soltero', likes:['Código','Automatización','Fútbol']
   },
 
-  /* Astrid ya en formato modelo */
+  // Astrid (modelo)
   { id:'p8', name:'Astrid', gender:'Mujer', age:17, city:'Huancayo', role:'Participante',
     img:'https://i.pravatar.cc/1000?img=5', avatar:'https://i.pravatar.cc/120?img=5',
     username:'Lynettd_2', sign:'Aries', career:'Medicina (Universidad Científica del Sur)',
@@ -70,17 +78,27 @@ const PEOPLE = [
     tags:['Ilustración','Branding'], likes:['Ilustración','Cine','Viajar']
   },
 
-  { id:'p9', name:'Zulma', gender:'Mujer', age:21, city:'Huancayo', role:'Participante',
+  // Zulma → NUEVO (modelo Astrid)
+  { id:'p9', name:'Zulma', gender:'Mujer', age:19, city:'Huancayo', role:'Participante',
     img:'https://i.pravatar.cc/1000?img=15', avatar:'https://i.pravatar.cc/120?img=15',
-    tags:['Planificación','Control'], bio:'Coordina cronograma y entregables.',
-    sign:'Escorpio', status:'Soltera', likes:['Planificación','Cocina','Ajedrez']
+    username:'Zulma_RXJNombre', sign:'Leo', career:'Medicina Humana', status:'Soltera',
+    goal:'Ser médico cirujano, investigar patologías recientes y ayudar a mis hermanos.',
+    favFood:'Ceviche',
+    bio:'Soy Zulma, leo, 19 años, estudio Medicina Humana. Mi meta es ser médico cirujano, investigar patologías recientes y apoyar a mis hermanos.',
+    seeks:['Respeto','Lealtad','Compromiso','Valores'],
+    tags:['Planificación','Control'], likes:['Planificación','Cocina','Ajedrez']
   },
 
-  { id:'prof', name:'Profesor', gender:'Hombre', age:35, city:'Huancayo', role:'Profesor',
+  // Profesor → NUEVO (modelo, con rol de profesor)
+  { id:'prof', name:'Victor Andres Mendoza Guerra', gender:'Hombre', age:35, city:'Lima', role:'Profesor',
     img:'https://images.unsplash.com/photo-1558640478-7e2c3ad3e27f?q=80&w=1200&auto=format&fit=crop',
     avatar:'https://images.unsplash.com/photo-1558640478-7e2c3ad3e27f?q=80&w=200&auto=format&fit=crop',
-    tags:['Supervisión','Feedback'], bio:'Guía académico y revisor.',
-    isProfessor:true, sign:'Aries', status:'Casado', likes:['Docencia','Café','Libros']
+    isProfessor:true,
+    username:'—', sign:'—', career:'Abogado (PUCP). Especialista en Derecho Laboral y Seguridad Social.',
+    status:'—', goal:'Gestión de relaciones laborales y resolución de conflictos.', favFood:'—',
+    bio:'Abogado con especialización en Derecho Laboral y Seguridad Social (PUCP). Máster y Segunda Especialidad en Derecho del Trabajo y Seguridad Social. Curso Internacional en Derecho Social (Universidad de Salamanca). Gerente de Relaciones Laborales en Valtx y Árbitro Laboral de Negociaciones Colectivas. Docente en USMP y Universidad Científica del Sur. Experiencia en minería, telecomunicaciones, banca y construcción.',
+    seeks:['Respeto','Profesionalismo','Ética'],
+    tags:['Supervisión','Feedback'], likes:['Docencia','Café','Libros']
   }
 ];
 
@@ -98,7 +116,7 @@ const ACTIVITIES = [
   },
   { id:'a3', title:'Períodos de bonanza',
     cover:'https://images.unsplash.com/photo-1561414927-6d86591d0c4f?q=80&w=1400&auto=format&fit=crop',
-    desc:'Identifica ciclos de crecimiento y sus factores (exportaciones, inversión, etc.).',
+    desc:'Identifica ciclos de crecimiento y sus factores.',
     choices:['Exportaciones','Inversión','Empleo','Inflación']
   },
   { id:'a4', title:'Terrorismo',
@@ -126,7 +144,7 @@ function unlockNext(currentId){
   }
 }
 
-/* ====== Utils ====== */
+/* Utils */
 function $(sel){ return document.querySelector(sel); }
 function el(tag, attrs={}, html=''){
   const n=document.createElement(tag);
@@ -173,7 +191,7 @@ function renderDeck(){
       <div class="deck-sub">${p.city ?? ''} · ${p.role ?? ''} · ${p.gender ?? ''}${p.isProfessor?' · <span class="p-badge">Profesor</span>':''}</div>
       <div class="deck-tags">${(p.tags||[]).map(t=>`<span class='pill'>${t}</span>`).join('')}</div>
     </div>`;
-  card.addEventListener('click', openProfile);
+  card.addEventListener('click', ()=>{ openProfile(); });
   deckShell.appendChild(card);
   renderDots();
 }
@@ -255,6 +273,8 @@ function renderProfile(person){
       </div>
     </div>`;
   perfilSec.classList.add('active'); perfilSec.style.display='block';
+  // 👇 baja automáticamente al perfil
+  perfilSec.scrollIntoView({behavior:'smooth', block:'start'});
 }
 
 function closeProfile(){
@@ -382,7 +402,7 @@ const a1Modules = [
 ];
 const a2Modules = [
   { id:'m1', title:'Conceptos y rasgos', img:'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop',
-    text:`Autoritarismo vs Democracia: concentración de poder y control de prensa vs separación de poderes, derechos y participación.`,
+    text:`Autoritarismo vs Democracia: concentración de poder/ control de prensa vs separación de poderes/ derechos/ participación.`,
     q:[
       {q:'Un rasgo típico del autoritarismo es…', opts:['Elecciones libres y competitivas','Concentración de poder y debilitamiento de controles','Fortalecimiento del pluralismo'], ok:1},
       {q:'La democracia se sostiene en…', opts:['Eliminación del Congreso','Separación de poderes y derechos','Gobierno de facto'], ok:1},
@@ -521,18 +541,6 @@ function openActivity(id){
   const store = makeGameStore(key, modules);
   let S = store.load();
 
-  function updateHUD(){
-    const pct = Math.round((S.ok / S.total)*100);
-    const panel = getPanelEl(id);
-    panel.querySelector(`#bar_${id}`).style.width = pct+'%';
-    panel.querySelector(`#pct_${id}`).textContent = pct+'%';
-    panel.querySelector(`#level_${id}`).textContent = String(S.i+1);
-    const m = modules[S.i];
-    panel.querySelector(`#img_${id}`).src = m.img;
-    panel.querySelector(`#img_${id}`).alt = m.title;
-    panel.querySelector(`#body_${id}`).innerHTML = `<h4>${m.title}</h4><p>${m.text}</p><p style="opacity:.85">Pulsa <b>Siguiente</b> para abrir el quiz.</p>`;
-  }
-
   function renderPanel(){
     const panel = getPanelEl(id);
     const m = modules[S.i];
@@ -561,6 +569,8 @@ function openActivity(id){
 
     document.getElementById(`back_${id}`).onclick = ()=>{ if(S.i>0){ S.i--; S.qi=0; store.save(S); renderPanel(); } };
     document.getElementById(`next_${id}`).onclick = ()=> openQuizView();
+    // 👇 baja automáticamente al detalle
+    panel.scrollIntoView({behavior:'smooth', block:'start'});
   }
 
   function openQuizView(){
@@ -619,5 +629,10 @@ function openActivity(id){
 }
 
 /* === Init === */
-renderDeck();
-renderPeople();
+function init(){
+  renderDeck();
+  renderPeople();
+  // Si entras con hash directo (actividad/perfil), manejamos ruta
+  handleRoute();
+}
+init();
