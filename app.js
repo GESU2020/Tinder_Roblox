@@ -45,14 +45,18 @@
 /* Cada participante puede tener 1 o 2 fotos:
    photos: [{label:'Real', url:'...'}, {label:'Roblox', url:'...'}]  */
 const PEOPLE = [
+  // Nazli -> nueva foto de mujer (clara y profesional)
   { id:'p1', name:'Nazli', gender:'Mujer', age:22, city:'Huancayo', role:'Participante',
-    photos:[{label:'Real', url:'https://i.pravatar.cc/1000?img=12'},{label:'Roblox', url:'https://i.pravatar.cc/1000?img=12'}],
-    avatar:'https://i.pravatar.cc/120?img=12',
+    photos:[
+      {label:'Real',   url:'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1200&q=80&auto=format&fit=crop'},
+      {label:'Roblox', url:'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1200&q=80&auto=format&fit=crop'}
+    ],
+    avatar:'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&q=60&auto=format&fit=crop',
     tags:['Investigación','Redacción'], bio:'Le gusta el análisis y las entrevistas.',
     sign:'Libra', status:'Soltera', career:'-', goal:'-', favFood:'-', seeks:['Viajar','Café','Fotografía']
   },
 
-  // Gabriela -> Daira (imagen repo)
+  // Daira
   { id:'p2', name:'Daira', gender:'Mujer', age:17, city:'Huancayo', role:'Participante',
     photos:[
       {label:'Real',   url:'https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/imagen_02_Daira.png'},
@@ -67,7 +71,7 @@ const PEOPLE = [
     tags:['Diseño','UI'], likes:['Diseño','Museos','Correr']
   },
 
-  // Gesú -> foto NUEVA + alt específico
+  // Gesú (imagen nueva + alt especial en deck)
   { id:'p3', name:'Gesú', gender:'Hombre', age:20, city:'Huancayo', role:'Participante',
     photos:[
       {label:'Real',   url:'https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/Imagen_03_Gesu.png'},
@@ -83,7 +87,7 @@ const PEOPLE = [
     tags:['Datos','KPIs'], likes:['Tecnología','Ciclismo','Series']
   },
 
-  // Neji -> Pamela
+  // Pamela
   { id:'p4', name:'Pamela Cruz', gender:'Mujer', age:18, city:'Huancayo', role:'Participante',
     photos:[
       {label:'Real',   url:'https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/imagen_04_Pamela.png'},
@@ -119,11 +123,19 @@ const PEOPLE = [
     sign:'Leo', status:'Soltera', career:'-', goal:'-', favFood:'-', seeks:['Video','Teatro','Mar']
   },
 
-  { id:'p7', name:'Sebastián', gender:'Hombre', age:23, city:'Huancayo', role:'Participante',
-    photos:[{label:'Real',url:'https://i.pravatar.cc/1000?img=55'}],
-    avatar:'https://i.pravatar.cc/120?img=55',
-    tags:['Fullstack','Automatización'], bio:'Integra herramientas y automatiza flujos.',
-    sign:'Capricornio', status:'Soltero', career:'-', goal:'-', favFood:'-', seeks:['Código','Automatización','Fútbol']
+  // Sebastián (ACTUALIZADO con QR y biografía)
+  { id:'p7', name:'Sebastián', gender:'Hombre', age:18, city:'Huancayo', role:'Participante',
+    photos:[
+      {label:'Real',   url:'https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/foto_sebastian.png'},
+      {label:'Roblox', url:'https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/foto_sebastian.png'}
+    ],
+    avatar:'https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/foto_sebastian.png',
+    username:'Chabazzzx', sign:'Cáncer', career:'Medicina Humana', status:'Soltero',
+    goal:'Graduarme, comprarme una casa y un carro', favFood:'Lomo Saltado',
+    bio:'Soy Sebastián. Me gusta el humor directo y las metas claras. Estoy enfocado en Medicina Humana y en construir mi camino paso a paso. Busco alguien auténtica que disfrute mi humor y tenga compromiso.',
+    seeks:['Ser mujer','Fidelidad','Entender mi humor','Celosa','Estar viva (opcional)'],
+    qrData:'https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/foto_sebastian.png',
+    tags:['Fullstack','Automatización'], likes:['Código','Automatización','Fútbol']
   },
 
   // Astrid
@@ -171,27 +183,47 @@ const PEOPLE = [
   }
 ];
 
-/* Actividades con imágenes provistas */
+/* Actividades (todas desbloqueadas) */
 const ACTIVITIES = [
   { id:'a1', title:'Cambios y permanencia',
     cover:'https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/primer-congreso.jpg',
     desc:'Explora procesos históricos donde algunas estructuras cambian y otras permanecen.',
-    icon:'📜', choices:['Economía','Sociedad','Política','Cultura']
+    icon:'📜',
+    q:[
+      {q:'¿Qué define mejor un “cambio”?', opts:['Continuidad de prácticas','Transformación de estructuras o prácticas','Repetición de ciclos'], ok:1},
+      {q:'Para analizar un cambio debes ubicar…', opts:['Solo quién lo impulsó','Qué cambió, cuándo y por qué','Solo el impacto económico'], ok:1},
+      {q:'Un ejemplo típico de cambio sería…', opts:['Mismos procedimientos','Nueva ley que reemplaza un marco anterior','Costumbres inalteradas'], ok:1},
+    ]
   },
   { id:'a2', title:'Autoritarismo y democracia',
     cover:'https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/velasco_alvarado.jpg',
     desc:'Compara rasgos, instituciones y consecuencias de ambos regímenes.',
-    icon:'⚖️', choices:['Instituciones','Derechos','Participación','Prensa']
+    icon:'⚖️',
+    q:[
+      {q:'Rasgo típico del autoritarismo:', opts:['Elecciones libres','Concentración de poder y control de prensa','Pluralismo fortalecido'], ok:1},
+      {q:'La democracia se sostiene en…', opts:['Eliminación del Congreso','Separación de poderes y derechos','Gobierno de facto'], ok:1},
+      {q:'Controlar medios y justicia es propio de…', opts:['Régimen autoritario','Democracia consolidada','Monarquía parlamentaria'], ok:0},
+    ]
   },
   { id:'a3', title:'Períodos de bonanza',
     cover:'https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/PeriodicoUNAL-061022-01am01.jpg',
     desc:'Identifica ciclos de crecimiento y sus factores.',
-    icon:'📈', choices:['Exportaciones','Inversión','Empleo','Inflación']
+    icon:'📈',
+    q:[
+      {q:'Disparador típico de bonanza:', opts:['Caída exportadora','Alza de precios/volumen de exportación','Menor demanda externa'], ok:1},
+      {q:'Sectores que suelen acelerarse:', opts:['Construcción y servicios','Solo agricultura subsistente','Todos caen'], ok:0},
+      {q:'Política prudente:', opts:['Gasto procíclico','Fondo de estabilización y reglas fiscales','Eliminar reglas macro'], ok:1},
+    ]
   },
   { id:'a4', title:'Terrorismo',
     cover:'https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/fotomarcha2carrusel-scaled.jpg',
     desc:'Analiza causas, impactos y respuestas estatales y sociales.',
-    icon:'🛡️', choices:['Causas','Impacto','Respuesta','Memoria']
+    icon:'🛡️',
+    q:[
+      {q:'Actor subversivo principal (1980–2000):', opts:['Sendero Luminoso','FAP','Defensoría'], ok:0},
+      {q:'Impacto recurrente:', opts:['Vacaciones largas','Desplazamientos forzados','Mayor inversión cultural inmediata'], ok:1},
+      {q:'Política pública clave para víctimas:', opts:['Ignorar testimonios','Plan Integral de Reparaciones','Aumentar aranceles'], ok:1},
+    ]
   }
 ];
 
@@ -281,19 +313,18 @@ function renderParticipants(){
 
   // Tilt 3D ligero
   $$('.card', masonry).forEach(card=>{
-    let rID=null;
     const onMove = (e)=>{
       const r = card.getBoundingClientRect();
       const x = (e.clientX - r.left)/r.width - 0.5;
       const y = (e.clientY - r.top)/r.height - 0.5;
       card.style.transform = `translateY(-4px) rotateX(${(-y*6).toFixed(2)}deg) rotateY(${(x*6).toFixed(2)}deg)`;
     };
-    const onLeave = ()=>{ card.style.transform=''; if(rID) cancelAnimationFrame(rID); };
+    const onLeave = ()=>{ card.style.transform=''; };
     card.addEventListener('mousemove', onMove);
     card.addEventListener('mouseleave', onLeave);
   });
 
-  // Click handlers
+  // Clicks
   masonry.addEventListener('click', (e)=>{
     const card = e.target.closest('.card'); if(!card) return;
     const id = card.getAttribute('data-id');
@@ -303,7 +334,7 @@ function renderParticipants(){
   });
 }
 
-/* ---------- MODAL PERFIL + CAROUSEL ---------- */
+/* ---------- MODAL PERFIL + CAROUSEL + QR ---------- */
 const modal = $('#perfilModal');
 const modalBackdrop = $('#modalBackdrop');
 const modalClose = $('#modalClose');
@@ -312,27 +343,33 @@ const carDots = $('#carDots');
 const carPrev = $('#carPrev');
 const carNext = $('#carNext');
 const profileSheet = $('#profileSheet');
-let carIndex = 0, carPhotos = [], carAltBase = 'Foto';
+let carIndex = 0, carPhotos = [], currentPerson = null;
 
 function openProfile(id){
   const p = PEOPLE.find(x=>x.id===id); if(!p) return;
-  const altName = (p.id==='p3') ? 'Gesú - participante' : (p.name || 'Participante');
+  currentPerson = p;
 
   // Fotos (si solo tiene 1, se duplica para navegación)
   carPhotos = (p.photos && p.photos.length) ? p.photos : [{label:'Foto', url:p.avatar}];
   if(carPhotos.length===1) carPhotos = [carPhotos[0], carPhotos[0]];
-  carIndex = 0; carAltBase = altName;
+  carIndex = 0;
 
-  // Track
   carTrack.innerHTML = carPhotos.map(ph=>`
     <div class="carousel-slide">
-      <img src="${ph.url}" alt="${altName} (${ph.label})">
+      <img src="${ph.url}" alt="${p.name} (${ph.label})">
     </div>
   `).join('');
-  // Dots
   carDots.innerHTML = carPhotos.map((_,i)=>`<span class="dot ${i===0?'active':''}" data-i="${i}"></span>`).join('');
 
-  // Sheet
+  // QR (solo si p.qrData)
+  const qrHTML = p.qrData ? `
+    <div class="qr-box">
+      <div style="font-weight:800;margin-bottom:6px">QR</div>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(p.qrData)}" alt="QR de ${p.name}" width="220" height="220" />
+      <div style="opacity:.8;margin-top:6px;font-size:12px;word-break:break-all">${p.qrData}</div>
+    </div>
+  ` : '';
+
   profileSheet.innerHTML = `
     <div class="name">${p.name} · ${p.age ?? ''}</div>
     <div class="sub">${p.city ?? ''} · ${p.role ?? ''} · ${p.gender ?? ''}${p.isProfessor?' · Profesor':''}</div>
@@ -349,13 +386,13 @@ function openProfile(id){
       <li><span>Comida favorita</span><b>${p.favFood ?? '-'}</b></li>
       <li><span>Qué busca</span><b>${(p.seeks&&p.seeks.length)? p.seeks.join(', ') : '-'}</b></li>
     </ul>
+    ${qrHTML}
   `;
 
   updateCarousel();
   modal.classList.add('active');
   modal.setAttribute('aria-hidden', 'false');
 }
-
 function closeProfile(){
   modal.classList.remove('active');
   modal.setAttribute('aria-hidden','true');
@@ -381,54 +418,125 @@ carDots.addEventListener('click', (e)=>{ const d=e.target.closest('.dot'); if(!d
   root.addEventListener('touchend',   ()=>{ if(!moving) return; moving=false; if(Math.abs(dx)>40){ if(dx<0) carIndex=(carIndex+1)%carPhotos.length; else carIndex=(carIndex-1+carPhotos.length)%carPhotos.length; updateCarousel(); } dx=0; });
 })();
 
-/* ---------- ACTIVIDADES + QUIZ (resumen) ---------- */
-const lockKey='activities_locks_v1';
-function loadLocks(){ try{ return JSON.parse(localStorage.getItem(lockKey)) || {unlocked:['a1'], passed:[]}; }catch{ return {unlocked:['a1'], passed:[]}; } }
-function saveLocks(s){ localStorage.setItem(lockKey, JSON.stringify(s)); }
+/* ---------- ACTIVIDADES (TODAS DESBLOQUEADAS) + QUIZ MODAL ---------- */
+const actGrid = $('#actGrid');
 function renderActivities(){
-  const s = loadLocks();
-  const grid = $('#actGrid');
-  grid.innerHTML = ACTIVITIES.map(a=>{
-    const unlocked = s.unlocked.includes(a.id);
-    return `
-    <article class="act-card" data-id="${a.id}" data-locked="${unlocked?0:1}">
-      <span class="cta">${unlocked?'Elegir':'Bloqueado'}</span>
-      ${unlocked?'':`<div class='lock-badge'>🔒 Bloqueado</div>`}
+  actGrid.innerHTML = ACTIVITIES.map(a=>`
+    <article class="act-card" data-id="${a.id}">
+      <span class="cta">Abrir quiz</span>
       <img src="${a.cover}" alt="${a.title}" />
-      <div class="topics">${(a.choices||[]).map(c=>`<span class="pill mini">${c}</span>`).join('')}</div>
+      <div class="topics">${(a.q||[]).map((_,i)=>`<span class="pill mini">P${i+1}</span>`).join('')}</div>
       <div class="title">${a.icon||''} ${a.title}</div>
-    </article>`;
-  }).join('');
+    </article>
+  `).join('');
 }
 renderActivities();
 
-$('#actGrid').addEventListener('click', (e)=>{
-  const card = e.target.closest('.act-card'); if(!card) return;
-  const id = card.dataset.id;
-  if(card.dataset.locked==='1'){ toast('🔒 Esta actividad está bloqueada.'); return; }
-  location.hash = `actividad?id=${id}`;
-});
+const quizModal = $('#quizModal');
+const quizBackdrop = $('#quizBackdrop');
+const quizClose = $('#quizClose');
+const quizCard = $('#quizCard');
 
-/* (Por brevedad, el contenido del quiz es igual al que ya tenías funcional.
-   Si necesitas que vuelva a insertar aquí los módulos detallados de A1–A4,
-   avísame y lo integro 1:1 con las nuevas imágenes.) */
+let quizState = { a:null, i:0, ok:0, ans:0 };
+
+function openQuiz(actId){
+  const a = ACTIVITIES.find(x=>x.id===actId); if(!a) return;
+  quizState = { a:actId, i:0, ok:0, ans:0 };
+  renderQuiz();
+  quizModal.classList.add('active');
+  quizModal.setAttribute('aria-hidden','false');
+}
+function closeQuiz(){
+  quizModal.classList.remove('active');
+  quizModal.setAttribute('aria-hidden','true');
+}
+quizBackdrop.addEventListener('click', closeQuiz);
+quizClose.addEventListener('click', closeQuiz);
+
+function renderQuiz(){
+  const a = ACTIVITIES.find(x=>x.id===quizState.a);
+  const q = a.q[quizState.i];
+  const total = a.q.length;
+  const wrong = Math.max(0, quizState.ans - quizState.ok);
+  const left  = Math.max(0, total - quizState.ans);
+
+  const group = `q-${a.id}`;
+  quizCard.innerHTML = `
+    <div class="qf-top">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="level">${a.title}</span>
+        <span class="pill">Quiz</span>
+      </div>
+      <div class="score">
+        <div class="cell">✔ <span class="v">${quizState.ok}</span></div>
+        <div class="cell">✖ <span class="v">${wrong}</span></div>
+        <div class="cell">⧗ <span class="v">${left}</span></div>
+        <div class="cell">Q <span class="v">${quizState.i+1}/${total}</span></div>
+      </div>
+    </div>
+    <div class="qf-q">${q.q}</div>
+    ${q.opts.map((t,k)=>`
+      <label class="qf-opt"><input type="radio" name="${group}" value="${k}"> <span>${t}</span></label>
+    `).join('')}
+    <div class="qf-actions">
+      <button class="btn" id="qPrev" ${quizState.i===0?'disabled':''}>← Anterior</button>
+      <button class="btn btn-cta" id="qNext">${quizState.i===total-1?'Finalizar →':'Siguiente →'}</button>
+    </div>
+  `;
+
+  $('#qPrev', quizCard)?.addEventListener('click', ()=>{
+    if(quizState.i>0){ quizState.i--; renderQuiz(); }
+  });
+
+  $('#qNext', quizCard)?.addEventListener('click', ()=>{
+    const picked = Array.from(quizCard.querySelectorAll(`input[name='${group}']`)).find(e=>e.checked);
+    if(!picked){ toast('Elige una opción'); return; }
+    const sel = parseInt(picked.value,10);
+    quizState.ans++;
+    if(sel===q.ok) quizState.ok++;
+
+    if(quizState.i < total-1){ quizState.i++; renderQuiz(); }
+    else {
+      const pct = Math.round((quizState.ok/quizState.ans)*100);
+      quizCard.innerHTML = `
+        <div class="qf-top">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span class="level">${a.title}</span>
+            <span class="pill">Resultado</span>
+          </div>
+        </div>
+        <div class="qf-q">Puntaje final: <b>${pct}%</b> (✔ ${quizState.ok} · ✖ ${quizState.ans-quizState.ok})</div>
+        <div class="qf-actions">
+          <button class="btn" id="qAgain">Reintentar</button>
+          <button class="btn btn-cta" id="qClose">Cerrar</button>
+        </div>
+      `;
+      $('#qAgain').addEventListener('click', ()=>{ quizState.i=0; quizState.ok=0; quizState.ans=0; renderQuiz(); });
+      $('#qClose').addEventListener('click', closeQuiz);
+    }
+  });
+}
+
+actGrid.addEventListener('click', (e)=>{
+  const card = e.target.closest('.act-card'); if(!card) return;
+  openQuiz(card.dataset.id);
+});
 
 /* ---------- Navegación hash básica ---------- */
 function handleHash(){
   const r = parseHash();
-  // Perfil (si se navega por hash directo)
   if(r.name==='perfil'){ openProfile(r.query.id); }
-  // Actividad: solo muestra detalle y hace scroll (contenido igual al anterior)
-  if(r.name==='actividad'){ document.getElementById('actividades').scrollIntoView({behavior:'smooth'}); }
+  if(r.name==='actividad'){ openQuiz(r.query.id); }
 }
 window.addEventListener('hashchange', handleHash);
 
 /* ---------- INIT ---------- */
+function renderDots(){ dotsEl.innerHTML = PEOPLE.map((_,i)=>`<span class="dot ${i===deckIdx?'active':''}"></span>`).join(''); }
 function init(){
   renderDeck();
   renderParticipants();
   handleHash();
-  // Smooth scroll del menú
+  // Smooth scroll
   $$('.nav a').forEach(a=>{
     a.addEventListener('click', (e)=>{
       const href = a.getAttribute('href');
