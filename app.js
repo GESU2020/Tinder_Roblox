@@ -7,27 +7,40 @@ const PEOPLE = [
   { id:'p1', name:'Nazli', gender:'Mujer', age:22, city:'Huancayo', role:'Participante',
     img:'https://i.pravatar.cc/1000?img=12', avatar:'https://i.pravatar.cc/120?img=12',
     tags:['Investigación','Redacción'], bio:'Le gusta el análisis y las entrevistas.',
-    sign:'Libra', status:'Soltera', likes:['Viajar','Café','Fotografía']
+    sign:'Libra', status:'Soltera', likes:['Viajar','Café','Fotografía'] 
   },
-  { id:'p2', name:'Gabriela', gender:'Mujer', age:21, city:'Huancayo', role:'Participante',
+   { id:'p2', name:'Gabriela', gender:'Mujer', age:17, city:'Huancayo', role:'Participante',
     img:'https://i.pravatar.cc/1000?img=47', avatar:'https://i.pravatar.cc/120?img=47',
-    tags:['Diseño','UI'], bio:'Apasionada por la estética limpia y accesible.',
-    sign:'Tauro', status:'Soltera', likes:['Diseño','Museos','Correr']
+    // Modelo unificado (tipo Astrid)
+    username:'leebitilin', sign:'Sagitario', career:'Medicina Humana', status:'Soltera',
+    goal:'Ser una profesional exitosa y tener una familia estable',
+    favFood:'Cheesecake de maracuyá',
+    bio:'Holaaa, soy Daira :] Mi signo es Sagitario, tengo 17 años y estudio Medicina Humana. Mi meta en la vida sería lograr ser una profesional exitosa y tener una familia estable. No tengo comida fav pero un postre que jamás me cansaría de comer es el cheesecake de maracuyá. Mi user en Roblox es leebitilin. Estado civil: soltera 😝',
+    seeks:['Honestidad','Estabilidad','Familia'],
+    tags:['Diseño','UI'], likes:['Diseño','Museos','Correr']
   },
   { id:'p3', name:'Gesú', gender:'Hombre', age:23, city:'Huancayo', role:'Participante',
     img:'https://i.pravatar.cc/1000?img=3', avatar:'https://i.pravatar.cc/120?img=3',
     tags:['Datos','KPIs'], bio:'Arma dashboards y revisa consistencia.',
     sign:'Virgo', status:'Soltero', likes:['Tecnología','Ciclismo','Series']
   },
-  { id:'p4', name:'Neji', gender:'Mujer', age:22, city:'Huancayo', role:'Participante',
+ { id:'p4', name:'Pamela Cruz', gender:'Mujer', age:18, city:'Huancayo', role:'Participante',
     img:'https://i.pravatar.cc/1000?img=66', avatar:'https://i.pravatar.cc/120?img=66',
-    tags:['Documentación','Edición'], bio:'Coordina guiones y síntesis.',
-    sign:'Acuario', status:'Soltera', likes:['Lectura','Edición','Música']
+    username:'Imbelvr25', sign:'Tauro', career:'Medicina Humana', status:'Soltera',
+    goal:'Amar y trabajar en mi carrera hasta tener mi propia clínica, sin olvidar mis valores para ayudar a las personas',
+    favFood:'Ceviche',
+    bio:'Soy Pamela Cruz, Tauro, tengo 18 años y estudio Medicina Humana. Mi usuario de Roblox es Imbelvr25. Mi meta en la vida es amar y trabajar en mi carrera hasta tener mi propia clínica, no olvidar mis valores y usarlos para ayudar a las personas. Mi comida favorita es el ceviche. Estoy soltera.',
+    seeks:['Compañerismo','Amor','Respeto mutuo','Honestidad','Lealtad'],
+    tags:['Documentación','Edición'], likes:['Lectura','Edición','Música']
   },
   { id:'p5', name:'Abigail', gender:'Mujer', age:21, city:'Huancayo', role:'Participante',
     img:'https://i.pravatar.cc/1000?img=8', avatar:'https://i.pravatar.cc/120?img=8',
-    tags:['Campo','Encuestas'], bio:'Lidera trabajo de campo y mapeo.',
-    sign:'Géminis', status:'Soltera', likes:['Encuestas','Voluntariado','Paseos']
+    username:'Arroz con leche', sign:'Aries', career:'Enfermería', status:'Soltera',
+    goal:'Ser feliz',
+    favFood:'Pollo enrollado con salsa de champiñones',
+    bio:'Soy Abigail, Aries, tengo 21 años y estudio Enfermería. Mi usuario es Arroz con leche. Estoy soltera. Mi meta en la vida es ser feliz. Mi comida favorita es el pollo enrollado con salsa de champiñones.',
+    seeks:['Compromiso','Lealtad','Trabajo','Superación'],
+    tags:['Campo','Encuestas'], likes:['Encuestas','Voluntariado','Paseos']
   },
   { id:'p6', name:'María', gender:'Mujer', age:22, city:'Huancayo', role:'Participante',
     img:'https://i.pravatar.cc/1000?img=30', avatar:'https://i.pravatar.cc/120?img=30',
