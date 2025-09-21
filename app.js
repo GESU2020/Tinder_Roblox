@@ -2,56 +2,99 @@
    Roblinder · App (Vanilla JS)
    ========================= */
 
-/* ====== Datos (PEOPLE con modelo Astrid) ====== */
+/* ====== PARTICULAS / fondo dinámico (cubos estilo Roblox) ====== */
+(function bg(){
+  const c = document.getElementById('bgParticles');
+  const ctx = c.getContext('2d');
+  function resize(){ c.width = innerWidth; c.height = innerHeight; }
+  addEventListener('resize', resize); resize();
+
+  const cubes = Array.from({length: 50}).map(()=>({
+    x: Math.random()*c.width,
+    y: Math.random()*c.height,
+    s: 4 + Math.random()*14,
+    vx: (Math.random()*0.6+0.2) * (Math.random()<0.5?-1:1),
+    vy: (Math.random()*0.6+0.2) * (Math.random()<0.5?-1:1),
+    a: Math.random()*Math.PI
+  }));
+
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    cubes.forEach(q=>{
+      q.x += q.vx; q.y += q.vy; q.a += 0.01;
+      if(q.x<-30) q.x=c.width+30; if(q.x>c.width+30) q.x=-30;
+      if(q.y<-30) q.y=c.height+30; if(q.y>c.height+30) q.y=-30;
+      ctx.save();
+      ctx.translate(q.x,q.y);
+      ctx.rotate(q.a);
+      const g = ctx.createLinearGradient(-q.s,-q.s,q.s,q.s);
+      g.addColorStop(0,'rgba(255,88,100,.18)');
+      g.addColorStop(1,'rgba(123,145,255,.18)');
+      ctx.fillStyle = g;
+      ctx.strokeStyle = 'rgba(255,255,255,.06)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.rect(-q.s, -q.s, q.s*2, q.s*2);
+      ctx.fill(); ctx.stroke();
+      ctx.restore();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ====== Datos (PEOPLE con modelo de Astrid y FOTOS NUEVAS) ====== */
 const PEOPLE = [
-  // Nazli (igual)
   { id:'p1', name:'Nazli', gender:'Mujer', age:22, city:'Huancayo', role:'Participante',
     img:'https://i.pravatar.cc/1000?img=12', avatar:'https://i.pravatar.cc/120?img=12',
     tags:['Investigación','Redacción'], bio:'Le gusta el análisis y las entrevistas.',
     sign:'Libra', status:'Soltera', likes:['Viajar','Café','Fotografía']
   },
 
-  // Gabriela → Daira (ya con modelo)
+  // Gabriela -> Daira (con imagen nueva)
   { id:'p2', name:'Daira', gender:'Mujer', age:17, city:'Huancayo', role:'Participante',
-    img:'https://i.pravatar.cc/1000?img=47', avatar:'https://i.pravatar.cc/120?img=47',
+    img:'https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/imagen_02_Daira.png',
+    avatar:'https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/imagen_02_Daira.png',
     username:'leebitilin', sign:'Sagitario', career:'Medicina Humana', status:'Soltera',
     goal:'Ser una profesional exitosa y tener una familia estable',
     favFood:'Cheesecake de maracuyá',
-    bio:'Holaaa, soy Daira :] Mi signo es Sagitario, tengo 17 años y estudio Medicina Humana. Mi meta en la vida sería lograr ser una profesional exitosa y tener una familia estable. Mi user en roblox es leebitilin. Estado civil: soltera 😝',
+    bio:'Holaaa, soy Daira :] Sagitario, 17, estudio Medicina Humana. User roblox: leebitilin. Meta: ser profesional exitosa y familia estable. Soltera 😝',
     seeks:['Honestidad','Lealtad','Compromiso'],
     tags:['Diseño','UI'], likes:['Diseño','Museos','Correr']
   },
 
-  // Gesú → NUEVO (modelo Astrid)
+  // Gesú -> Nova (modelo Astrid)
   { id:'p3', name:'Gesú', gender:'Hombre', age:20, city:'Huancayo', role:'Participante',
     img:'https://i.pravatar.cc/1000?img=3', avatar:'https://i.pravatar.cc/120?img=3',
     username:'Nova', sign:'Aries',
     career:'Ingeniería Empresarial de Sistemas (UCSUR)', status:'Soltero',
     goal:'Emprender mi propio negocio',
     favFood:'Ceviche y té de orines verdes',
-    bio:'"Soy Nova, un joven con metas claras y ganas de crecer. Me apasiona la tecnología y el mundo empresarial, pero sobre todo quiero compartir mi camino con alguien auténtico. Valoro la lealtad, el respeto y el esfuerzo por salir adelante. Si compartes esos valores, ya tenemos algo en común."',
-    seeks:['Lealtad','Valores','Respeto a sí misma','Capacidad de trabajo','Superación de retos'],
+    bio:'"Soy Nova, me apasiona la tecnología y el mundo empresarial. Valoro la lealtad, el respeto y el esfuerzo por salir adelante."',
+    seeks:['Lealtad','Valores','Respeto a sí misma','Trabajar','Superación'],
     tags:['Datos','KPIs'], likes:['Tecnología','Ciclismo','Series']
   },
 
-  // Neji → Pamela (modelo Astrid) — ya lo tenías
+  // Neji -> Pamela (con imagen nueva)
   { id:'p4', name:'Pamela Cruz', gender:'Mujer', age:18, city:'Huancayo', role:'Participante',
-    img:'https://i.pravatar.cc/1000?img=66', avatar:'https://i.pravatar.cc/120?img=66',
+    img:'https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/imagen_04_Pamela.png',
+    avatar:'https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/imagen_04_Pamela.png',
     username:'Imbelvr25', sign:'Tauro', career:'Medicina Humana', status:'Soltera',
-    goal:'Amar y trabajar en mi carrera hasta tener mi propia clínica; no olvidar los valores y usarlos para ayudar a las personas',
+    goal:'Tener mi propia clínica y ayudar a las personas con valores',
     favFood:'Ceviche',
-    bio:'Soy Pamela Cruz, Tauro, 18 años, estudio Medicina Humana. Usuario de Roblox: Imbelvr25. Mi meta es tener mi propia clínica y ayudar desde mis valores. Soltera.',
+    bio:'Pamela Cruz, Tauro, 18, Medicina Humana. User: Imbelvr25. Meta: clínica propia y ayudar con valores. Soltera.',
     seeks:['Compañerismo','Amor','Respeto mutuo','Honestidad','Lealtad'],
     tags:['Documentación','Edición'], likes:['Lectura','Edición','Música']
   },
 
-  // Abigail (modelo Astrid) — ya lo tenías
+  // Abigail (con imagen nueva)
   { id:'p5', name:'Abigail', gender:'Mujer', age:21, city:'Huancayo', role:'Participante',
-    img:'https://i.pravatar.cc/1000?img=8', avatar:'https://i.pravatar.cc/120?img=8',
+    img:'https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/imagen_05_abigail.png',
+    avatar:'https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/imagen_05_abigail.png',
     username:'Arroz con leche', sign:'Aries', career:'Enfermería', status:'Soltera',
     goal:'Ser feliz',
     favFood:'Pollo enrollado con salsa de champiñones',
-    bio:'Soy Abigail, Aries, 21 años, estudio Enfermería. Usuario: Arroz con leche. Soltera. Mi meta en la vida es ser feliz. Mi comida favorita es el pollo enrollado con salsa de champiñones.',
+    bio:'Abigail, Aries, 21, Enfermería. Usuario: Arroz con leche. Meta: Ser feliz.',
     seeks:['Compromiso','Lealtad','Trabajador','Superación'],
     tags:['Campo','Encuestas'], likes:['Encuestas','Voluntariado','Paseos']
   },
@@ -68,116 +111,98 @@ const PEOPLE = [
     sign:'Capricornio', status:'Soltero', likes:['Código','Automatización','Fútbol']
   },
 
-  // Astrid (modelo)
+  // Astrid (con imagen nueva)
   { id:'p8', name:'Astrid', gender:'Mujer', age:17, city:'Huancayo', role:'Participante',
-    img:'https://i.pravatar.cc/1000?img=5', avatar:'https://i.pravatar.cc/120?img=5',
+    img:'https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/imagen_08_astrid.png',
+    avatar:'https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/imagen_08_astrid.png',
     username:'Lynettd_2', sign:'Aries', career:'Medicina (Universidad Científica del Sur)',
     status:'En relación', goal:'Tener una familia estable', favFood:'Arroz tapado',
-    bio:'Soy Astrid, aries, estudio Medicina en la Universidad Científica del Sur. Mi usuario de Roblox es Lynettd_2, tengo 17 años, mi meta en la vida es tener una familia estable y mi comida favorita es el arroz tapado. En relación.',
+    bio:'Soy Astrid, estudio Medicina en la UCSur. User Roblox: Lynettd_2. Mi meta es tener una familia estable.',
     seeks:['Respeto','Honestidad','Metas claras'],
     tags:['Ilustración','Branding'], likes:['Ilustración','Cine','Viajar']
   },
 
-  // Zulma → NUEVO (modelo Astrid)
+  // Zulma (con imagen nueva)
   { id:'p9', name:'Zulma', gender:'Mujer', age:19, city:'Huancayo', role:'Participante',
-    img:'https://i.pravatar.cc/1000?img=15', avatar:'https://i.pravatar.cc/120?img=15',
+    img:'https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/imagen_09_Zulma.png',
+    avatar:'https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/imagen_09_Zulma.png',
     username:'Zulma_RXJNombre', sign:'Leo', career:'Medicina Humana', status:'Soltera',
-    goal:'Ser médico cirujano, investigar patologías recientes y ayudar a mis hermanos.',
+    goal:'Ser médico cirujano, investigar patologías y ayudar a mis hermanos',
     favFood:'Ceviche',
-    bio:'Soy Zulma, leo, 19 años, estudio Medicina Humana. Mi meta es ser médico cirujano, investigar patologías recientes y apoyar a mis hermanos.',
+    bio:'Zulma, Leo, 19, Medicina Humana. Meta: ser cirujano e investigar patologías.',
     seeks:['Respeto','Lealtad','Compromiso','Valores'],
     tags:['Planificación','Control'], likes:['Planificación','Cocina','Ajedrez']
   },
 
-  // Profesor → NUEVO (modelo, con rol de profesor)
+  // Profesor (con imagen nueva)
   { id:'prof', name:'Victor Andres Mendoza Guerra', gender:'Hombre', age:35, city:'Lima', role:'Profesor',
-    img:'https://images.unsplash.com/photo-1558640478-7e2c3ad3e27f?q=80&w=1200&auto=format&fit=crop',
-    avatar:'https://images.unsplash.com/photo-1558640478-7e2c3ad3e27f?q=80&w=200&auto=format&fit=crop',
+    img:'https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/imagen_10_profesor.png',
+    avatar:'https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/imagen_10_profesor.png',
     isProfessor:true,
     username:'—', sign:'—', career:'Abogado (PUCP). Especialista en Derecho Laboral y Seguridad Social.',
     status:'—', goal:'Gestión de relaciones laborales y resolución de conflictos.', favFood:'—',
-    bio:'Abogado con especialización en Derecho Laboral y Seguridad Social (PUCP). Máster y Segunda Especialidad en Derecho del Trabajo y Seguridad Social. Curso Internacional en Derecho Social (Universidad de Salamanca). Gerente de Relaciones Laborales en Valtx y Árbitro Laboral de Negociaciones Colectivas. Docente en USMP y Universidad Científica del Sur. Experiencia en minería, telecomunicaciones, banca y construcción.',
+    bio:'Abogado PUCP. Máster y Segunda Especialidad en Derecho del Trabajo y Seguridad Social. Curso Internacional (Universidad de Salamanca). Gerente de Relaciones Laborales en Valtx y Árbitro Laboral. Docente en USMP y UCSur.',
     seeks:['Respeto','Profesionalismo','Ética'],
     tags:['Supervisión','Feedback'], likes:['Docencia','Café','Libros']
   }
 ];
 
-/* Actividades */
+/* Actividades (con IMÁGENES NUEVAS) */
 const ACTIVITIES = [
   { id:'a1', title:'Cambios y permanencia',
-    cover:'https://images.unsplash.com/photo-1543286386-2e659306cd6c?q=80&w=1400&auto=format&fit=crop',
+    cover:'https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/primer-congreso.jpg',
     desc:'Explora procesos históricos donde algunas estructuras cambian y otras permanecen.',
-    choices:['Economía','Sociedad','Política','Cultura']
+    icon:'📜', choices:['Economía','Sociedad','Política','Cultura']
   },
   { id:'a2', title:'Autoritarismo y democracia',
-    cover:'https://images.unsplash.com/photo-1529101091764-c3526daf38fe?q=80&w=1400&auto=format&fit=crop',
+    cover:'https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/velasco_alvarado.jpg',
     desc:'Compara rasgos, instituciones y consecuencias de ambos regímenes.',
-    choices:['Instituciones','Derechos','Participación','Prensa']
+    icon:'⚖️', choices:['Instituciones','Derechos','Participación','Prensa']
   },
   { id:'a3', title:'Períodos de bonanza',
-    cover:'https://images.unsplash.com/photo-1561414927-6d86591d0c4f?q=80&w=1400&auto=format&fit=crop',
+    cover:'https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/PeriodicoUNAL-061022-01am01.jpg',
     desc:'Identifica ciclos de crecimiento y sus factores.',
-    choices:['Exportaciones','Inversión','Empleo','Inflación']
+    icon:'📈', choices:['Exportaciones','Inversión','Empleo','Inflación']
   },
   { id:'a4', title:'Terrorismo',
-    cover:'https://images.unsplash.com/photo-1551966775-a4ddc8df52d9?q=80&w=1400&auto=format&fit=crop',
+    cover:'https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/fotomarcha2carrusel-scaled.jpg',
     desc:'Analiza causas, impactos y respuestas estatales y sociales.',
-    choices:['Causas','Impacto','Respuesta','Memoria']
+    icon:'🛡️', choices:['Causas','Impacto','Respuesta','Memoria']
   }
 ];
 
 /* ====== Estado bloqueos ====== */
 const lockKey = 'activities_locks_v1';
-function loadLocks(){
-  try{ return JSON.parse(localStorage.getItem(lockKey)) || {unlocked:['a1'], passed:[]}; }
-  catch{ return {unlocked:['a1'], passed:[]}; }
-}
+function loadLocks(){ try{ return JSON.parse(localStorage.getItem(lockKey)) || {unlocked:['a1'], passed:[]}; }catch{ return {unlocked:['a1'], passed:[]}; } }
 function saveLocks(s){ localStorage.setItem(lockKey, JSON.stringify(s)); }
 function isUnlocked(id){ return loadLocks().unlocked.includes(id); }
 function markPassed(id){ const s=loadLocks(); if(!s.passed.includes(id)) s.passed.push(id); saveLocks(s); }
 function unlockNext(currentId){
-  const order=['a1','a2','a3','a4'];
-  const i=order.indexOf(currentId);
-  if(i>-1 && i<order.length-1){
-    const s=loadLocks(); const next=order[i+1];
-    if(!s.unlocked.includes(next)){ s.unlocked.push(next); saveLocks(s); }
-  }
+  const order=['a1','a2','a3','a4']; const i=order.indexOf(currentId);
+  if(i>-1 && i<order.length-1){ const s=loadLocks(); const next=order[i+1]; if(!s.unlocked.includes(next)){ s.unlocked.push(next); saveLocks(s);} }
 }
 
-/* Utils */
+/* ====== Utils ====== */
 function $(sel){ return document.querySelector(sel); }
-function el(tag, attrs={}, html=''){
-  const n=document.createElement(tag);
-  Object.entries(attrs).forEach(([k,v])=> n.setAttribute(k, v));
-  if(html!=='' && html!=null) n.innerHTML = html;
-  return n;
-}
-function toast(msg){
-  const t=el('div',{class:'toast'}); t.textContent=msg;
-  document.body.appendChild(t); setTimeout(()=>t.remove(), 2000);
-}
-
-
-
-
+function el(tag, attrs={}, html=''){ const n=document.createElement(tag); Object.entries(attrs).forEach(([k,v])=> n.setAttribute(k, v)); if(html!=='' && html!=null) n.innerHTML = html; return n; }
+function toast(msg){ const t=el('div',{class:'toast'}); t.textContent=msg; document.body.appendChild(t); setTimeout(()=>t.remove(), 2000); }
 
 /* ====== Router ====== */
-function route(){
+function parseRoute(){
   const h = (location.hash||'').replace(/^#/,'');
   if(!h) return {name:'', query:{}};
-  const [name,q] = h.split('?');
-  const query = {};
-  if(q){ new URLSearchParams(q).forEach((v,k)=> query[k]=v); }
+  const [name,q] = h.split('?'); const query = {}; if(q){ new URLSearchParams(q).forEach((v,k)=> query[k]=v); }
   return {name, query};
 }
 
+
+
+
+
 /* ====== Deck ====== */
 let deckIdx = 0;
-const deckShell = $('#deckShell');
-const dotsEl   = $('#dots');
-function renderDots(){
-  dotsEl.innerHTML = PEOPLE.map((_,i)=>`<span class="dot ${i===deckIdx?'active':''}"></span>`).join('');
-}
+const deckShell = $('#deckShell'), dotsEl = $('#dots');
+function renderDots(){ dotsEl.innerHTML = PEOPLE.map((_,i)=>`<span class="dot ${i===deckIdx?'active':''}"></span>`).join(''); }
 function renderDeck(){
   const p = PEOPLE[deckIdx]; if(!p) return;
   deckShell.querySelectorAll('.deck-card').forEach(n=>n.remove());
@@ -191,7 +216,7 @@ function renderDeck(){
       <div class="deck-sub">${p.city ?? ''} · ${p.role ?? ''} · ${p.gender ?? ''}${p.isProfessor?' · <span class="p-badge">Profesor</span>':''}</div>
       <div class="deck-tags">${(p.tags||[]).map(t=>`<span class='pill'>${t}</span>`).join('')}</div>
     </div>`;
-  card.addEventListener('click', ()=>{ openProfile(); });
+  card.addEventListener('click', ()=> openProfile());
   deckShell.appendChild(card);
   renderDots();
 }
@@ -199,11 +224,10 @@ function next(){ deckIdx = (deckIdx+1) % PEOPLE.length; renderDeck(); }
 function prev(){ deckIdx = (deckIdx-1+PEOPLE.length) % PEOPLE.length; renderDeck(); }
 function openProfile(){ location.hash = `perfil?id=${PEOPLE[deckIdx].id}`; }
 function flash(type){
-  const elId = type==='like' ? '#badgeLike' : '#badgeNope';
-  const elB = deckShell.querySelector(elId); if(!elB) return;
-  elB.style.opacity = 1; setTimeout(()=>{ elB.style.opacity = 0; }, 400);
+  const id = (type==='like')? '#badgeLike': '#badgeNope';
+  const b = deckShell.querySelector(id); if(!b) return;
+  b.style.opacity = 1; setTimeout(()=> b.style.opacity=0, 400);
 }
-/* Controles */
 $('#zoneRight').addEventListener('click', ()=>{ flash('like'); next(); });
 $('#zoneLeft').addEventListener('click', ()=>{ flash('nope'); prev(); });
 $('#btnLike').addEventListener('click', ()=>{ flash('like'); next(); });
@@ -218,8 +242,17 @@ function renderPeople(){
     <article class="p-card" data-id="${p.id}">
       <div class="avatar${p.isProfessor?' pro-gold':''}"><img src="${p.avatar}" alt="${p.name}" /></div>
       <div>
-        <div class="name">${p.name}${p.isProfessor?` <span class='p-badge'>Profesor</span>`:''}</div>
+        <div class="name" style="font-weight:800">${p.name}${p.isProfessor?` <span class='p-badge'>Profesor</span>`:''}</div>
         <div style="color:var(--muted);font-size:13px">${p.city} · ${p.role} · ${p.gender}</div>
+        <div class="chips" style="margin-top:8px">
+          <span class="pill mini">Edad: ${p.age ?? '-'}</span>
+          <span class="pill mini">Signo: ${p.sign ?? '-'}</span>
+          <span class="pill mini">Carrera: ${p.career ?? '-'}</span>
+          <span class="pill mini">Estado: ${p.status ?? '-'}</span>
+          <span class="pill mini">Meta: ${p.goal ?? '-'}</span>
+          <span class="pill mini">Comida fav: ${p.favFood ?? '-'}</span>
+          <span class="pill mini">Busca: ${(p.seeks&&p.seeks.length)? p.seeks.join(', '): '-'}</span>
+        </div>
       </div>
     </article>`).join('');
 }
@@ -273,37 +306,23 @@ function renderProfile(person){
       </div>
     </div>`;
   perfilSec.classList.add('active'); perfilSec.style.display='block';
-  // 👇 baja automáticamente al perfil
   perfilSec.scrollIntoView({behavior:'smooth', block:'start'});
 }
+function closeProfile(){ perfilSec.classList.remove('active'); perfilSec.style.display='none'; }
 
-function closeProfile(){
-  perfilSec.classList.remove('active'); perfilSec.style.display='none';
-  document.getElementById('participantes').scrollIntoView({behavior:'smooth'});
-}
-
-/* ====== Router (perfil / actividad) ====== */
+/* ====== Navegación hash ====== */
 function handleRoute(){
-  const r = route();
+  const r = parseRoute();
   if(r.name==='perfil'){
-    const person = PEOPLE.find(p=>p.id===r.query.id);
-    renderProfile(person);
-  }else{
-    closeProfile();
-  }
-  if(r.name==='actividad'){
-    openActivity(r.query.id);
-  }else{
-    hideAllActivityDetails();
-  }
+    const person = PEOPLE.find(p=>p.id===r.query.id); renderProfile(person);
+  }else{ closeProfile(); }
+  if(r.name==='actividad'){ openActivity(r.query.id); }
 }
 window.addEventListener('hashchange', handleRoute);
 
 
 
 
-
-handleRoute();
 
 /* ====== Actividades ====== */
 const actGrid     = $('#actGrid');
@@ -317,12 +336,12 @@ function renderActivities(){
   actGrid.innerHTML = ACTIVITIES.map(a=>{
     const unlocked = locks.unlocked.includes(a.id);
     return `
-    <article class="act-card" data-id="${a.id}" data-locked="${unlocked?0:1}">
+    <article class="act-card" data-id="${a.id}" data-locked="${unlocked?0:1}" title="${a.desc}">
       <span class="cta">${unlocked?'Elegir':'Bloqueado'}</span>
       ${unlocked?'':`<div class='lock-badge'>🔒 Bloqueado</div>`}
       <img src="${a.cover}" alt="${a.title}" />
       <div class="topics">${(a.choices||[]).map(c=>`<span class="pill mini">${c}</span>`).join('')}</div>
-      <div class="title">${a.title}</div>
+      <div class="title">${a.icon || ''} ${a.title}</div>
     </article>`;
   }).join('');
 }
@@ -340,199 +359,142 @@ function hideAllActivityDetails(){
 }
 
 /* ====== Overlay Quiz ====== */
-const qf = $('#quizFocus');
-const qfBg = $('#qfBg');
-const qfCard = $('#qfCard');
+const qf = $('#quizFocus'), qfBg = $('#qfBg'), qfCard = $('#qfCard');
 function showQuiz(){ qf.classList.add('active'); qf.style.display='block'; }
 function hideQuiz(){ qf.classList.remove('active'); qf.style.display='none'; qfCard.innerHTML=''; }
 
-/* ====== Helpers estado de juego ====== */
+/* ====== Game helpers ====== */
 function makeGameStore(key, modules){
-  function load(){
-    try{
-      const base = {i:0, qi:0, ok:0, ans:0, total: modules.reduce((a,m)=>a+m.q.length,0)};
-      return Object.assign(base, JSON.parse(localStorage.getItem(key)||'{}'));
-    }catch{ return {i:0, qi:0, ok:0, ans:0, total: modules.reduce((a,m)=>a+m.q.length,0)}; }
-  }
+  function load(){ try{ const base={i:0, qi:0, ok:0, ans:0, total: modules.reduce((a,m)=>a+m.q.length,0)}; return Object.assign(base, JSON.parse(localStorage.getItem(key)||'{}')); }catch{ return {i:0, qi:0, ok:0, ans:0, total: modules.reduce((a,m)=>a+m.q.length,0)}; } }
   function save(s){ localStorage.setItem(key, JSON.stringify(s)); }
   return { load, save };
 }
 
 /* ====== Módulos de cada actividad (A1–A4) ====== */
 const a1Modules = [
-  { id:'m1', title:'Cambios', img:'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1200&auto=format&fit=crop',
-    text:`Los <b>cambios</b> son transformaciones en estructuras, actores o prácticas...`,
+  { id:'m1', title:'Cambios', img:ACTIVITIES[0].cover,
+    text:`Los <b>cambios</b> son transformaciones en estructuras, actores o prácticas.`,
     q:[
       {q:'¿Qué define mejor un “cambio”?', opts:['La continuidad de prácticas','La transformación de estructuras o prácticas','La repetición de ciclos'], ok:1},
       {q:'Para analizar un cambio debes ubicar…', opts:['Solo quién lo impulsó','Qué cambió, cuándo y por qué','Solo el impacto económico inmediato'], ok:1},
       {q:'Un ejemplo típico de cambio sería…', opts:['Mismos procedimientos por décadas','Nueva ley que reemplaza un marco anterior','Costumbres inalteradas'], ok:1},
     ],
-    qbg:[
-      'https://source.unsplash.com/1600x1000/?change,arrows',
-      'https://source.unsplash.com/1600x1000/?timeline,history',
-      'https://source.unsplash.com/1600x1000/?law,reform'
-    ]
+    qbg:[ACTIVITIES[0].cover, ACTIVITIES[0].cover, ACTIVITIES[0].cover]
   },
-  { id:'m2', title:'Permanencias', img:'https://images.unsplash.com/photo-1549880338-65ddcdfd017b?q=80&w=1200&auto=format&fit=crop',
-    text:`Las <b>permanencias</b> son elementos que se mantienen pese a los cambios...`,
+  { id:'m2', title:'Permanencias', img:ACTIVITIES[0].cover,
+    text:`Las <b>permanencias</b> son elementos que se mantienen pese a los cambios.`,
     q:[
       {q:'Una “permanencia” es…', opts:['Todo lo que cambia rápido','Lo que se mantiene a través del tiempo','Un fenómeno aleatorio'], ok:1},
       {q:'Ejemplo de permanencia:', opts:['Rotación anual de presidentes','Misma práctica cultural que persiste','Cambio de moneda cada mes'], ok:1},
       {q:'Sirven para…', opts:['Ocultar tendencias','Explicar por qué no todo cambia','Eliminar conflictos'], ok:1},
     ],
-    qbg:[
-      'https://source.unsplash.com/1600x1000/?tradition,culture',
-      'https://source.unsplash.com/1600x1000/?weaving,craft',
-      'https://source.unsplash.com/1600x1000/?architecture,columns'
-    ]
+    qbg:[ACTIVITIES[0].cover, ACTIVITIES[0].cover, ACTIVITIES[0].cover]
   },
-  { id:'m3', title:'Relación cambios–permanencias', img:'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop',
-    text:`Analizar <b>cambios y permanencias</b> juntos permite comprender ritmos históricos...`,
+  { id:'m3', title:'Relación cambios–permanencias', img:ACTIVITIES[0].cover,
+    text:`Analizar ambos permite comprender ritmos históricos.`,
     q:[
       {q:'Mirar ambos conceptos juntos permite…', opts:['Ignorar tensiones','Comprender ritmos y tensiones','Predecir con certeza absoluta'], ok:1},
-      {q:'Si cambian normas pero persisten prácticas informales, entonces…', opts:['No hay nada que estudiar','Hay tensión entre cambio formal y permanencia social','Todo cambió por completo'], ok:1},
-      {q:'Un buen análisis debe…', opts:['Tomar partido sin evidencia','Equilibrar evidencia de cambio y continuidad','Evitar fuentes'], ok:1},
+      {q:'Si cambian normas pero persisten prácticas informales…', opts:['No hay nada que estudiar','Hay tensión cambio–permanencia','Todo cambió por completo'], ok:1},
+      {q:'Un buen análisis debe…', opts:['Sesgo sin evidencia','Equilibrar evidencia','Evitar fuentes'], ok:1},
     ],
-    qbg:[
-      'https://source.unsplash.com/1600x1000/?balance,scales',
-      'https://source.unsplash.com/1600x1000/?policy,society',
-      'https://source.unsplash.com/1600x1000/?research,analysis'
-    ]
+    qbg:[ACTIVITIES[0].cover, ACTIVITIES[0].cover, ACTIVITIES[0].cover]
   }
 ];
+
 const a2Modules = [
-  { id:'m1', title:'Conceptos y rasgos', img:'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop',
-    text:`Autoritarismo vs Democracia: concentración de poder/ control de prensa vs separación de poderes/ derechos/ participación.`,
+  { id:'m1', title:'Conceptos y rasgos', img:ACTIVITIES[1].cover,
+    text:`Autoritarismo: concentración de poder/ control de prensa. Democracia: separación de poderes/ derechos/ participación.`,
     q:[
-      {q:'Un rasgo típico del autoritarismo es…', opts:['Elecciones libres y competitivas','Concentración de poder y debilitamiento de controles','Fortalecimiento del pluralismo'], ok:1},
-      {q:'La democracia se sostiene en…', opts:['Eliminación del Congreso','Separación de poderes y derechos','Gobierno de facto'], ok:1},
-      {q:'Controlar medios y justicia es propio de…', opts:['Un régimen autoritario','Una democracia consolidada','Una monarquía parlamentaria'], ok:0},
+      {q:'Un rasgo típico del autoritarismo es…', opts:['Elecciones libres','Concentración de poder y menos controles','Pluralismo'], ok:1},
+      {q:'La democracia se sostiene en…', opts:['Eliminar Congreso','Separación de poderes y derechos','Gobierno de facto'], ok:1},
+      {q:'Controlar medios y justicia es propio de…', opts:['Régimen autoritario','Democracia consolidada','Monarquía parlamentaria'], ok:0},
     ],
-    qbg:[
-      'https://source.unsplash.com/1600x1000/?power,authority',
-      'https://source.unsplash.com/1600x1000/?law,justice',
-      'https://source.unsplash.com/1600x1000/?press,media'
-    ]
+    qbg:[ACTIVITIES[1].cover, ACTIVITIES[1].cover, ACTIVITIES[1].cover]
   },
-  { id:'m2', title:'Perú 1992 y efectos', img:'https://images.unsplash.com/photo-1543357480-c60d40007a5b?q=80&w=1200&auto=format&fit=crop',
+  { id:'m2', title:'Perú 1992 y efectos', img:ACTIVITIES[1].cover,
     text:`5/04/1992: disolución del Congreso (autogolpe). Constitución de 1993: hiperpresidencialismo.`,
     q:[
-      {q:'¿Qué ocurrió el 5 de abril de 1992?', opts:['Se fortaleció el Congreso','Se disolvió el Congreso y se intervinieron instituciones','Cambio regular de gabinete'], ok:1},
-      {q:'La Constitución de 1993 favoreció…', opts:['Un sistema hiperpresidencial','Menos atribuciones del Ejecutivo','Mayor independencia inmediata de poderes'], ok:0},
-      {q:'Según la CVR, el autogolpe fue…', opts:['Un acto democrático','De naturaleza autoritaria','Irrelevante'], ok:1},
+      {q:'¿Qué ocurrió el 5/04/1992?', opts:['Se fortaleció el Congreso','Se disolvió el Congreso y se intervinieron instituciones','Cambio regular de gabinete'], ok:1},
+      {q:'La Constitución 1993 favoreció…', opts:['Hiperpresidencialismo','Menos atribuciones del Ejecutivo','Mayor independencia inmediata'], ok:0},
+      {q:'Según la CVR, el autogolpe fue…', opts:['Democrático','Autoritario','Irrelevante'], ok:1},
     ],
-    qbg:[
-      'https://source.unsplash.com/1600x1000/?congress,building',
-      'https://source.unsplash.com/1600x1000/?constitution,laws',
-      'https://source.unsplash.com/1600x1000/?history,peru'
-    ]
+    qbg:[ACTIVITIES[1].cover, ACTIVITIES[1].cover, ACTIVITIES[1].cover]
   },
-  { id:'m3', title:'2000–2022 y fortalecer', img:'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop',
-    text:`Transparencia/datos abiertos, participación efectiva, reformas (bicameralidad) y cultura cívica práctica.`,
+  { id:'m3', title:'Fortalecer democracia', img:ACTIVITIES[1].cover,
+    text:`Transparencia, datos abiertos, participación efectiva, bicameralidad y cultura cívica.`,
     q:[
-      {q:'Una medida para acercar la democracia al ciudadano es…', opts:['Restringir acceso a la información','Portales de datos abiertos útiles y claros','Eliminar la participación local'], ok:1},
-      {q:'Propuesta institucional:', opts:['Bicameralidad y renovación parcial','Cierre permanente del Congreso','Eliminar elecciones'], ok:0},
-      {q:'La cultura cívica busca…', opts:['Desalentar la participación','Practicar la democracia en la vida cotidiana','Solo educación universitaria'], ok:1},
+      {q:'Para acercar la democracia al ciudadano…', opts:['Restringir información','Portales de datos abiertos claros','Eliminar participación local'], ok:1},
+      {q:'Propuesta institucional:', opts:['Bicameralidad y renovación','Cierre del Congreso','Eliminar elecciones'], ok:0},
+      {q:'La cultura cívica busca…', opts:['Desalentar participación','Practicar la democracia diaria','Solo educación universitaria'], ok:1},
     ],
-    qbg:[
-      'https://source.unsplash.com/1600x1000/?open,data',
-      'https://source.unsplash.com/1600x1000/?parliament,debate',
-      'https://source.unsplash.com/1600x1000/?civic,community'
-    ]
+    qbg:[ACTIVITIES[1].cover, ACTIVITIES[1].cover, ACTIVITIES[1].cover]
   }
 ];
+
 const a3Modules = [
-  { id:'m1', title:'Boom exportador', img:'https://images.unsplash.com/photo-1561414927-6d86591d0c4f?q=80&w=1200&auto=format&fit=crop',
-    text:`Una <b>bonanza</b> suele iniciar por alzas de <b>exportaciones</b> y mejores términos de intercambio.`,
+  { id:'m1', title:'Boom exportador', img:ACTIVITIES[2].cover,
+    text:`Una <b>bonanza</b> suele iniciar por alzas de exportaciones y mejores términos de intercambio.`,
     q:[
       {q:'Disparador típico:', opts:['Caída de exportaciones','Alza de precios/exportaciones','Menor demanda externa'], ok:1},
       {q:'Mejoran términos cuando…', opts:['Suben importaciones','Suben más exportaciones','Ambos caen igual'], ok:1},
       {q:'Efecto macro probable:', opts:['Menor recaudación','Mayor recaudación','Hiperinflación inmediata'], ok:1},
     ],
-    qbg:[
-      'https://source.unsplash.com/1600x1000/?exports,containers',
-      'https://source.unsplash.com/1600x1000/?commodities,prices',
-      'https://source.unsplash.com/1600x1000/?treasury,revenue'
-    ]
+    qbg:[ACTIVITIES[2].cover, ACTIVITIES[2].cover, ACTIVITIES[2].cover]
   },
-  { id:'m2', title:'Inversión y empleo', img:'https://images.unsplash.com/photo-1508385082359-f38ae991e8f2?q=80&w=1200&auto=format&fit=crop',
-    text:`En bonanza, <b>inversión</b> y <b>empleo</b> tienden a expandirse; la productividad sostiene efectos.`,
+  { id:'m2', title:'Inversión y empleo', img:ACTIVITIES[2].cover,
+    text:`En bonanza, inversión y empleo tienden a expandirse; la productividad sostiene efectos.`,
     q:[
       {q:'La inversión en bonanza…', opts:['Se contrae','Se expande','No cambia'], ok:1},
       {q:'Sectores que aceleran:', opts:['Construcción y servicios','Solo agricultura subsistente','Todos caen'], ok:0},
       {q:'Para sostener efectos:', opts:['Solo consumo','Productividad y capital humano','Eliminar inversión pública'], ok:1},
     ],
-    qbg:[
-      'https://source.unsplash.com/1600x1000/?investment,cranes',
-      'https://source.unsplash.com/1600x1000/?jobs,services',
-      'https://source.unsplash.com/1600x1000/?education,training'
-    ]
+    qbg:[ACTIVITIES[2].cover, ACTIVITIES[2].cover, ACTIVITIES[2].cover]
   },
-  { id:'m3', title:'Inflación y sostenibilidad', img:'https://images.unsplash.com/photo-1553531888-a0b8d1f4f06b?q=80&w=1200&auto=format&fit=crop',
-    text:`Bonanza puede presionar <b>inflación</b> y <b>tipo de cambio</b>. Ahorrar y diversificar ayuda.`,
+  { id:'m3', title:'Inflación y sostenibilidad', img:ACTIVITIES[2].cover,
+    text:`Bonanza puede calentar la economía; ahorrar y diversificar ayuda.`,
     q:[
       {q:'Riesgo común:', opts:['Sobrecalentamiento e inflación','Deflación estructural','Desempleo masivo inmediato'], ok:0},
       {q:'Política prudente:', opts:['Gasto procíclico','Fondo de estabilización','Eliminar reglas macro'], ok:1},
       {q:'Para reducir vulnerabilidad:', opts:['Concentrar un commodity','Diversificar economía','Cerrar comercio'], ok:1},
     ],
-    qbg:[
-      'https://source.unsplash.com/1600x1000/?inflation,prices',
-      'https://source.unsplash.com/1600x1000/?sovereign,wealth',
-      'https://source.unsplash.com/1600x1000/?diversification,industry'
-    ]
+    qbg:[ACTIVITIES[2].cover, ACTIVITIES[2].cover, ACTIVITIES[2].cover]
   }
 ];
+
 const a4Modules = [
-  { id:'m1', title:'Causas y actores', img:'https://images.unsplash.com/photo-1529101091764-c3526daf38fe?q=80&w=1200&auto=format&fit=crop',
-    text:`El <b>terrorismo</b> en el Perú (1980–2000) involucró a <b>Sendero Luminoso</b> y <b>MRTA</b>. Causas: exclusión, crisis, radicalización.`,
+  { id:'m1', title:'Causas y actores', img:ACTIVITIES[3].cover,
+    text:`Terrorismo en el Perú (1980–2000): SL y MRTA; causas: exclusión, crisis, radicalización.`,
     q:[
       {q:'Actor subversivo principal:', opts:['Sendero Luminoso','Fuerza Aérea','Defensoría del Pueblo'], ok:0},
       {q:'Causa estructural:', opts:['Pleno empleo','Exclusión social y crisis','Abundancia de servicios'], ok:1},
       {q:'MRTA es…', opts:['Movimiento ambientalista','Grupo subversivo peruano','Agencia estatal'], ok:1},
     ],
-    qbg:[
-      'https://source.unsplash.com/1600x1000/?peru,andes',
-      'https://source.unsplash.com/1600x1000/?poverty,crisis',
-      'https://source.unsplash.com/1600x1000/?history,peru'
-    ]
+    qbg:[ACTIVITIES[3].cover, ACTIVITIES[3].cover, ACTIVITIES[3].cover]
   },
-  { id:'m2', title:'Impactos en la población', img:'https://images.unsplash.com/photo-1543357480-c60d40007a5b?q=80&w=1200&auto=format&fit=crop',
-    text:`Víctimas mayormente rurales/indígenas; muertes, desapariciones, desplazamientos. Hubo violaciones a DD.HH. por agentes del Estado (CVR).`,
+  { id:'m2', title:'Impactos', img:ACTIVITIES[3].cover,
+    text:`Víctimas mayormente rurales/indígenas; desplazamientos y trauma; hubo abusos de DD.HH.`,
     q:[
       {q:'Impacto recurrente:', opts:['Más vacaciones','Desplazamientos forzados y trauma','Mayor inversión cultural inmediata'], ok:1},
       {q:'CVR reporta abusos de…', opts:['Solo privados','Agentes del Estado y subversivos','Organismos internacionales'], ok:1},
       {q:'Lenguas más afectadas:', opts:['Quechua y originarias','Solo inglés','Sueco'], ok:0},
     ],
-    qbg:[
-      'https://source.unsplash.com/1600x1000/?community,andes',
-      'https://source.unsplash.com/1600x1000/?human,rights',
-      'https://source.unsplash.com/1600x1000/?ayacucho,peru'
-    ]
+    qbg:[ACTIVITIES[3].cover, ACTIVITIES[3].cover, ACTIVITIES[3].cover]
   },
-  { id:'m3', title:'Respuesta y memoria', img:'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop',
-    text:`Seguridad y justicia con respeto a DD.HH.; reparaciones integrales; memoria y educación para la paz.`,
+  { id:'m3', title:'Respuesta y memoria', img:ACTIVITIES[3].cover,
+    text:`Seguridad/justicia con DD.HH.; reparaciones; memoria y educación para la paz.`,
     q:[
       {q:'Política clave para víctimas:', opts:['Ignorar testimonios','Plan Integral de Reparaciones','Aumento de aranceles'], ok:1},
       {q:'Para evitar abusos estatales:', opts:['Debilitar controles','Respeto a DD.HH. y separación de poderes','Censura total a la prensa'], ok:1},
       {q:'La memoria ayuda a…', opts:['Repetir errores','Construir cultura de paz','Eliminar diversidad'], ok:1},
     ],
-    qbg:[
-      'https://source.unsplash.com/1600x1000/?justice,law',
-      'https://source.unsplash.com/1600x1000/?rights,freedom',
-      'https://source.unsplash.com/1600x1000/?education,peace'
-    ]
+    qbg:[ACTIVITIES[3].cover, ACTIVITIES[3].cover, ACTIVITIES[3].cover]
   }
 ];
 
-/* ====== Render detalle/quiz genérico ====== */
+/* ====== Detalle + Quiz genérico ====== */
 const PASS = 70;
-function getPanelEl(id){
-  if(id==='a1') return actDetail;
-  if(id==='a2') return actDetailA2;
-  if(id==='a3') return actDetailA3;
-  if(id==='a4') return actDetailA4;
-  return actDetail;
-}
+function getPanelEl(id){ return (id==='a1')?actDetail:(id==='a2')?actDetailA2:(id==='a3')?actDetailA3:actDetailA4; }
+
 function openActivity(id){
   if(!isUnlocked(id)){ toast('🔒 Esta actividad está bloqueada.'); return; }
   hideAllActivityDetails();
@@ -543,20 +505,21 @@ function openActivity(id){
 
   function renderPanel(){
     const panel = getPanelEl(id);
-    const m = modules[S.i];
-    const pct = Math.round((S.ok / S.total)*100);
+    const m = modules[S.i]; const pct = Math.round((S.ok / S.total)*100);
     panel.innerHTML = `
       <div class="act-hero" id="wrap_${id}">
-        <div class="media"><img id="img_${id}" src="${m.img}" alt="${m.title}" /></div>
+        <div class="media glow"><img id="img_${id}" src="${m.img}" alt="${m.title}" style="width:100%;height:380px;object-fit:cover;border-radius:20px;border:1px solid #2a2a38" /></div>
         <div class="box">
-          <div class="game-head">
+          <div class="game-head" style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
             <span class="level">Nivel <span id="level_${id}">${S.i+1}</span> / ${modules.length}</span>
-            <div class="progress" aria-label="Progreso"><div class="in" id="bar_${id}" style="width:${pct}%"></div></div>
+            <div class="progress" aria-label="Progreso" style="flex:1;height:8px;background:#1d1d27;border:1px solid #2a2a38;border-radius:999px;overflow:hidden">
+              <div class="in" id="bar_${id}" style="height:100%;width:${pct}%;background:linear-gradient(90deg,var(--accent1),var(--accent2))"></div>
+            </div>
             <div style="min-width:56px;text-align:right"><span id="pct_${id}">${pct}%</span></div>
           </div>
-          <div id="body_${id}" class="lesson">
-            <h4>${m.title}</h4>
-            <p>${m.text}</p>
+          <div id="body_${id}" class="lesson" style="background:#0f0f15;border:1px solid #2a2a38;border-radius:18px;padding:14px">
+            <h4 style="margin:0 0 6px">${m.title}</h4>
+            <p style="margin:0 0 8px;opacity:.9">${m.text}</p>
             <p style="opacity:.85">Pulsa <b>Siguiente</b> para abrir el quiz.</p>
           </div>
           <div style="display:flex;gap:8px;margin-top:12px">
@@ -566,10 +529,8 @@ function openActivity(id){
         </div>
       </div>`;
     panel.style.display='block'; panel.classList.add('active');
-
     document.getElementById(`back_${id}`).onclick = ()=>{ if(S.i>0){ S.i--; S.qi=0; store.save(S); renderPanel(); } };
     document.getElementById(`next_${id}`).onclick = ()=> openQuizView();
-    // 👇 baja automáticamente al detalle
     panel.scrollIntoView({behavior:'smooth', block:'start'});
   }
 
@@ -597,7 +558,6 @@ function openActivity(id){
       </div>
       <div class="qf-msg" id="qmsg_${id}"></div>`;
     showQuiz();
-
     document.getElementById(`qback_${id}`).onclick = ()=>{ hideQuiz(); };
     document.getElementById(`qnext_${id}`).onclick = ()=>{
       const sel = [...document.querySelectorAll(`input[name='ans_${id}']`)].find(e=>e.checked);
@@ -615,24 +575,20 @@ function openActivity(id){
     const m = modules[S.i];
     if(S.qi < m.q.length-1){ S.qi++; localStorage.setItem(`${id}_game_v1`, JSON.stringify(S)); openQuizView(); return; }
     if(S.i < modules.length-1){ S.i++; S.qi=0; localStorage.setItem(`${id}_game_v1`, JSON.stringify(S)); hideQuiz(); renderPanel(); return; }
-
     // fin actividad
     const pct = Math.round((S.ok / S.total)*100);
     markPassed(id);
     if(pct>=PASS){ unlockNext(id); renderActivities(); }
-    hideQuiz();
-    toast(`Resultado ${id.toUpperCase()}: ${pct}%`);
-    renderPanel();
+    hideQuiz(); toast(`Resultado ${id.toUpperCase()}: ${pct}%`); renderPanel();
   }
 
   renderPanel();
 }
 
-/* === Init === */
+/* ====== Init ====== */
 function init(){
   renderDeck();
   renderPeople();
-  // Si entras con hash directo (actividad/perfil), manejamos ruta
-  handleRoute();
+  handleRoute(); // por si entra con hash directo
 }
 init();
