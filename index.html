@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Roblinder · Estilo Tinder x Roblox</title>
+  <title>Roblinder · Tinder x Roblox</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,10 +12,13 @@
 
   <header>
     <nav class="nav container">
-      <div class="logo">
-        <img class="logo-img" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0' x2='1' y1='1' y2='0'><stop stop-color='%23ff5864'/><stop offset='1' stop-color='%237b91ff'/></linearGradient></defs><rect rx='18' width='100' height='100' fill='url(%23g)'/><text x='50' y='64' font-family='Plus Jakarta Sans, Poppins, Arial' font-size='56' text-anchor='middle' fill='white' font-weight='800'>R</text></svg>" alt="Roblinder" />
-        <span>Roblinder</span>
-      </div>
+      <a class="logo" href="#deck" aria-label="Inicio">
+        <img
+          class="logo-img logo-img-new"
+          src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/logo.png?v=2"
+          alt="Logo"
+        />
+      </a>
       <div class="nav-links">
         <a class="btn btn-ghost" href="#deck">Inicio</a>
         <a class="btn btn-ghost" href="#participantes">Participantes</a>
@@ -42,7 +45,9 @@
     <!-- PARTICIPANTES -->
     <section id="participantes" class="route-section">
       <h2 class="section-title"><span class="tag">Equipo</span> Participantes</h2>
-      <div class="grid cols-3" id="peopleGrid"></div>
+
+      <!-- Masonry (CSS columns) -->
+      <div id="peopleMasonry" class="masonry"></div>
     </section>
 
     <!-- ACTIVIDADES -->
@@ -60,13 +65,22 @@
       <div class="act-detail" id="actDetailA4" style="display:none"></div>
     </section>
 
-    <!-- PERFIL -->
-    <section id="perfil" class="route-section" style="display:none">
-      <h2 class="section-title"><span class="tag">Perfil</span> <span id="perfilTitle">&nbsp;</span></h2>
-      <div id="perfilWrap" class="profile-hero"></div>
-      <div class="profile-actions">
-        <a class="btn" href="#participantes">← Volver a participantes</a>
-        <a class="btn btn-ghost" href="#deck">Ir al deck</a>
+    <!-- PERFIL (Modal con carrusel) -->
+    <section id="perfilModal" class="modal" aria-hidden="true">
+      <div class="modal-backdrop" id="modalBackdrop"></div>
+      <div class="modal-dialog">
+        <button class="modal-close" id="modalClose" aria-label="Cerrar">✕</button>
+
+        <!-- Carrusel -->
+        <div class="carousel" id="carousel">
+          <button class="carousel-nav prev" id="carPrev" aria-label="Foto anterior">‹</button>
+          <div class="carousel-track" id="carTrack"></div>
+          <button class="carousel-nav next" id="carNext" aria-label="Foto siguiente">›</button>
+          <div class="carousel-dots" id="carDots"></div>
+        </div>
+
+        <!-- Ficha -->
+        <div class="profile-sheet" id="profileSheet"></div>
       </div>
     </section>
 
