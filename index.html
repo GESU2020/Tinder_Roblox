@@ -3,10 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Roblinder · Blog estilo Tinder</title>
+  <title>Roblinder · Estilo Tinder x Roblox</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- Fondo dinámico -->
+  <canvas id="bgParticles" aria-hidden="true"></canvas>
+
   <header>
     <nav class="nav container">
       <div class="logo">
@@ -21,15 +24,15 @@
     </nav>
   </header>
 
-  <main class="container">
-    <!-- DECK -->
-    <section id="deck">
-      <div class="deck-shell" id="deckShell">
+  <main class="container route-wrap">
+    <!-- INICIO / DECK -->
+    <section id="deck" class="route-section">
+      <div class="deck-shell glow" id="deckShell">
         <div class="dots" id="dots"></div>
         <div class="zone left" id="zoneLeft" aria-label="Anterior"></div>
         <div class="zone right" id="zoneRight" aria-label="Siguiente"></div>
       </div>
-      <div style="display:flex; gap:10px; justify-content:center; margin-top:10px">
+      <div class="deck-cta">
         <button class="btn" id="btnNope">NOPE</button>
         <button class="btn btn-cta" id="btnLike">LIKE</button>
         <button class="btn btn-ghost" id="btnOpen">Ver perfil</button>
@@ -37,15 +40,15 @@
     </section>
 
     <!-- PARTICIPANTES -->
-    <section id="participantes" style="margin-top:28px">
+    <section id="participantes" class="route-section">
       <h2 class="section-title"><span class="tag">Equipo</span> Participantes</h2>
       <div class="grid cols-3" id="peopleGrid"></div>
     </section>
 
     <!-- ACTIVIDADES -->
-    <section id="actividades">
+    <section id="actividades" class="route-section">
       <div class="act-head">
-        <h2 class="section-title" style="margin:0"><span class="tag">Juego</span> ¿Qué opción eliges?</h2>
+        <h2 class="section-title" style="margin:0"><span class="tag">Juego</span> Actividades a realizar</h2>
         <div style="opacity:.8;font-size:14px">Completa niveles para desbloquear más.</div>
       </div>
       <div class="act-grid" id="actGrid"></div>
@@ -58,10 +61,10 @@
     </section>
 
     <!-- PERFIL -->
-    <section id="perfil" style="margin-top:28px; display:none">
+    <section id="perfil" class="route-section" style="display:none">
       <h2 class="section-title"><span class="tag">Perfil</span> <span id="perfilTitle">&nbsp;</span></h2>
       <div id="perfilWrap" class="profile-hero"></div>
-      <div style="margin-top:16px;display:flex;gap:10px">
+      <div class="profile-actions">
         <a class="btn" href="#participantes">← Volver a participantes</a>
         <a class="btn btn-ghost" href="#deck">Ir al deck</a>
       </div>
