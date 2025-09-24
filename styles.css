@@ -20,20 +20,15 @@ html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-famil
 
 a{color:inherit;text-decoration:none}
 .container{max-width:1200px;margin:0 auto;padding:20px}
-
-/* ===== Header ===== */
-header{
-  position:sticky;top:0;z-index:50;
-  background:linear-gradient(180deg, rgba(14,14,18,.95), rgba(14,14,18,.70) 60%, transparent);
-  backdrop-filter:blur(6px);
-}
+header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg, rgba(14,14,18,.95), rgba(14,14,18,.70) 60%, transparent);backdrop-filter:blur(6px)}
 .nav{display:flex;align-items:center;gap:16px;padding:12px 20px}
 
-/* ==== LOGO XL (+un poquito) ==== */
-.logo{display:flex;align-items:center;min-height:110px;line-height:1}
-.logo-img{height:110px;width:auto;border-radius:10px;object-fit:contain;display:block}
-@media (min-width:768px) and (max-width:1023.98px){ .logo-img{height:130px} .logo{min-height:130px} }
-@media (min-width:1024px){ .logo-img{height:150px;max-height:170px} .logo{min-height:150px} }
+/* ==== LOGO: alturas responsivas ==== */
+.logo{display:flex;align-items:center;min-height:56px;line-height:1}
+.logo-img{height:56px;width:auto;border-radius:8px;object-fit:contain;display:block}
+@media (min-width:768px) and (max-width:1023.98px){ .logo-img{height:65px} .logo{min-height:65px} }
+@media (min-width:1024px){ .logo-img{height:70px;max-height:80px} .logo{min-height:70px} }
+.logo-img-new{mix-blend-mode:multiply}
 
 .nav-links{margin-left:auto;display:flex;gap:14px;flex-wrap:wrap}
 .btn{
@@ -50,7 +45,6 @@ header{
 .route-wrap{position:relative}
 .route-section{opacity:0;transform:translateY(8px);animation:enter .4s ease forwards}
 @keyframes enter{to{opacity:1;transform:none}}
-.section-title{font-weight:900;letter-spacing:.3px}
 
 /* ===== Deck (Inicio) ===== */
 #deck{margin-top:10px}
@@ -171,8 +165,8 @@ header{
 .qf-opt{display:flex;align-items:center;gap:8px;padding:12px;border:1px solid #2a2a38;border-radius:12px;background:#12121a;margin:8px 0}
 .qf-actions{display:flex;gap:8px;margin-top:10px}
 
-/* Footer */
 footer{margin:36px 0 24px;color:#9aa0aa;text-align:center}
+.section-title{font-weight:900;letter-spacing:.3px}
 
 /* Toast mini */
 .toast{position:fixed;right:16px;bottom:16px;background:#14141b;border:1px solid #2a2a38;padding:10px 12px;border-radius:12px;box-shadow:0 12px 24px rgba(0,0,0,.35)}
