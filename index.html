@@ -12,10 +12,10 @@
 
   <header>
     <nav class="nav container">
-      <!-- Logo grande (sin texto/wordmark) -->
-      <a class="logo logo--xl" href="#deck" aria-label="Inicio">
+      <a class="logo" href="#deck" aria-label="Inicio">
+        <!-- Logo con alturas responsivas (ver CSS) -->
         <img
-          class="logo-img"
+          class="logo-img logo-img-new"
           src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/logo.png?v=3"
           alt="Logo Roblinder"
         />
@@ -80,12 +80,14 @@
     </div>
   </section>
 
-  <!-- MODAL QUIZ (todas las actividades desbloqueadas) -->
+  <!-- MODAL QUIZ (para todas las actividades) -->
   <section id="quizModal" class="modal" aria-hidden="true" role="dialog" aria-label="Quiz">
     <div class="modal-backdrop" id="quizBackdrop"></div>
     <div class="modal-dialog dialog-wide">
       <button class="modal-close" id="quizClose" aria-label="Cerrar">✕</button>
-      <div class="qf-card" id="quizCard"></div>
+      <div class="qf-card" id="quizCard">
+        <!-- Se inyecta dinámicamente -->
+      </div>
     </div>
   </section>
 
