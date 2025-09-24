@@ -12,14 +12,13 @@
 
   <header>
     <nav class="nav container">
-      <!-- Logo grande -->
+      <!-- Logo grande (sin texto/wordmark) -->
       <a class="logo logo--xl" href="#deck" aria-label="Inicio">
         <img
           class="logo-img"
           src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/logo.png?v=3"
           alt="Logo Roblinder"
         />
-        <span class="logo-word">Roblinder</span>
       </a>
       <div class="nav-links">
         <a class="btn btn-ghost" href="#deck">Inicio</a>
@@ -30,7 +29,7 @@
   </header>
 
   <main class="container route-wrap">
-    <!-- INICIO -->
+    <!-- INICIO / DECK -->
     <section id="deck" class="route-section">
       <div class="deck-shell glow" id="deckShell" aria-live="polite">
         <div class="dots" id="dots"></div>
@@ -53,7 +52,7 @@
     <!-- ACTIVIDADES -->
     <section id="actividades" class="route-section">
       <div class="act-head">
-        <h2 class="section-title"><span class="tag">Juego</span> Actividades a realizar</h2>
+        <h2 class="section-title" style="margin:0"><span class="tag">Juego</span> Actividades a realizar</h2>
         <div style="opacity:.8;font-size:14px">Elige cualquier actividad y responde el quiz.</div>
       </div>
       <div class="act-grid" id="actGrid"></div>
@@ -62,11 +61,33 @@
     <footer>© 2025 · Roblinder.</footer>
   </main>
 
-  <!-- MODAL PERFIL -->
-  <section id="perfilModal" class="modal" aria-hidden="true" aria-labelledby="perfilTitle" role="dialog"></section>
+  <!-- MODAL PERFIL (con carrusel) -->
+  <section id="perfilModal" class="modal" aria-hidden="true" aria-labelledby="perfilTitle" role="dialog">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-dialog" id="perfilDialog" tabindex="-1">
+      <button class="modal-close" id="modalClose" aria-label="Cerrar">✕</button>
 
-  <!-- MODAL QUIZ -->
-  <section id="quizModal" class="modal" aria-hidden="true" role="dialog"></section>
+      <!-- Carrusel -->
+      <div class="carousel" id="carousel">
+        <button class="carousel-nav prev" id="carPrev" aria-label="Foto anterior">‹</button>
+        <div class="carousel-track" id="carTrack"></div>
+        <button class="carousel-nav next" id="carNext" aria-label="Foto siguiente">›</button>
+        <div class="carousel-dots" id="carDots"></div>
+      </div>
+
+      <!-- Ficha -->
+      <div class="profile-sheet" id="profileSheet" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- MODAL QUIZ (todas las actividades desbloqueadas) -->
+  <section id="quizModal" class="modal" aria-hidden="true" role="dialog" aria-label="Quiz">
+    <div class="modal-backdrop" id="quizBackdrop"></div>
+    <div class="modal-dialog dialog-wide">
+      <button class="modal-close" id="quizClose" aria-label="Cerrar">✕</button>
+      <div class="qf-card" id="quizCard"></div>
+    </div>
+  </section>
 
   <script src="app.js" defer></script>
 </body>
