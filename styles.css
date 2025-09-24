@@ -22,11 +22,13 @@ a{color:inherit;text-decoration:none}
 .container{max-width:1200px;margin:0 auto;padding:20px}
 header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg, rgba(14,14,18,.95), rgba(14,14,18,.70) 60%, transparent);backdrop-filter:blur(6px)}
 .nav{display:flex;align-items:center;gap:16px;padding:12px 20px}
-.logo{display:flex;align-items:center;min-height:40px}
-.logo-img{height:48px;width:auto;border-radius:8px;object-fit:contain}
+
+/* ==== LOGO: alturas responsivas ==== */
+.logo{display:flex;align-items:center;min-height:56px;line-height:1}
+.logo-img{height:56px;width:auto;border-radius:8px;object-fit:contain;display:block}
+@media (min-width:768px) and (max-width:1023.98px){ .logo-img{height:65px} .logo{min-height:65px} }
+@media (min-width:1024px){ .logo-img{height:70px;max-height:80px} .logo{min-height:70px} }
 .logo-img-new{mix-blend-mode:multiply}
-@media(min-width:768px){.logo-img{height:52px}}
-@media(min-width:1200px){.logo-img{height:56px}}
 
 .nav-links{margin-left:auto;display:flex;gap:14px;flex-wrap:wrap}
 .btn{
@@ -166,5 +168,5 @@ header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg, rgba(
 footer{margin:36px 0 24px;color:#9aa0aa;text-align:center}
 .section-title{font-weight:900;letter-spacing:.3px}
 
-/* Toast mini (si usas) */
+/* Toast mini */
 .toast{position:fixed;right:16px;bottom:16px;background:#14141b;border:1px solid #2a2a38;padding:10px 12px;border-radius:12px;box-shadow:0 12px 24px rgba(0,0,0,.35)}
