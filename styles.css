@@ -1,106 +1,135 @@
-/* ==== Tema base, layout, botones, etc. (igual que tu original) ==== */
-:root{
-  --bg:#0b0b12; --bg2:#0e0e16; --fg:#eaeaf2; --muted:#b6b6c8;
-  --a1:#7b91ff; --a2:#C084FC; --gold:#ffd76a;
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #0b0b0b;
+  color: #fff;
 }
-*{box-sizing:border-box}
-html,body{margin:0;background:radial-gradient(1200px 600px at 30% -10%, #12121a 0, #0b0b12 40%, #08080f 70%), #08080f;color:var(--fg);font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial}
-a{color:inherit;text-decoration:none}
-.container{max-width:1200px;margin:0 auto;padding:clamp(12px,3vw,24px)}
-.topbar{position:sticky;top:0;z-index:10;background:linear-gradient(180deg,#0f0f15,rgba(15,15,21,.7));backdrop-filter:blur(8px);border-bottom:1px solid #1e1e2b}
-.brand{display:flex;align-items:center;gap:10px;padding:10px 14px}
-.logo{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:6px;background:linear-gradient(135deg,var(--a1),var(--a2));color:#0b0b12;font-weight:800}
-.nav{display:flex;justify-content:space-between;gap:12px;padding:10px 14px}
-.nav .group{display:flex;gap:8px;flex-wrap:wrap}
-.btn{border:1px solid #2a2a38;background:#14141c;color:#fff;border-radius:12px;padding:8px 12px;cursor:pointer}
-.btn-ghost{background:transparent}
-.btn-cta{background:linear-gradient(135deg,var(--a1),var(--a2));border-color:transparent}
 
-/* ==== Rutas y secciones ==== */
-.route-wrap{display:grid;gap:clamp(18px,2vw,26px)}
-.route-section{border:1px solid #1f1f2a;border-radius:20px;padding:clamp(14px,2vw,20px);background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));box-shadow:inset 0 0 0 1px rgba(255,255,255,.06), 0 16px 30px rgba(0,0,0,.28)}
-.section-title{font-weight:900;letter-spacing:.2px}
-.tag{display:inline-block;padding:.18rem .55rem;border-radius:999px;background:#1a1a26;color:#d7d7eb;border:1px solid #2b2b3a;margin-right:6px}
-
-/* ==== DECK (inicio) – igual que original (resumen) ==== */
-.deck-shell{position:relative;height:380px;border-radius:22px;background:#11111a;display:grid;place-items:center;overflow:hidden}
-.dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:6px}
-.dots span{width:6px;height:6px;border-radius:999px;background:#3a3a55}
-.dots span.active{background:linear-gradient(135deg,var(--a1),var(--a2))}
-.zone{position:absolute;top:0;bottom:0;width:50%}
-.zone.left{left:0} .zone.right{right:0}
-.deck-cta{display:flex;gap:10px;justify-content:center}
-
-/* ==== PARTICIPANTES (restaurado) ==== */
-.masonry{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:clamp(12px,1.6vw,20px)}
-.card{position:relative;border-radius:18px;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));box-shadow:0 10px 30px rgba(0,0,0,.25), inset 0 0 0 1px rgba(255,255,255,.05);transition:transform .25s ease, box-shadow .25s ease}
-.card:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(0,0,0,.30), inset 0 0 0 1px rgba(255,255,255,.07)}
-.card .cover{width:100%;height:200px;object-fit:cover;display:block}
-.card .body{padding:12px 14px}
-.card .title{font-weight:800}
-.card .meta{opacity:.85;margin:.2rem 0}
-.card .chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{font-size:12px;padding:.18rem .45rem;border-radius:999px;border:1px solid #2e2e3a;background:#13131b}
-.actions{display:flex;gap:8px;margin-top:8px}
-
-/* ==== ACTIVIDADES (restaurado) ==== */
-.act-head{display:flex;flex-direction:column;gap:6px}
-.act-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:clamp(12px,1.6vw,18px)}
-.act-card{border:1px solid #252535;border-radius:16px;background:#10101a;padding:12px}
-.act-card h4{margin:.3rem 0 .2rem 0}
-.act-card p{opacity:.9}
-.act-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
-.pill{display:inline-block;padding:.18rem .55rem;border-radius:999px;background:#1a1a26;border:1px solid #2b2b3a}
-
-/* ==== CORRUPCIÓN (Perú vs México) — estilos existentes + panel nuevo ==== */
-.corrupcion-header{display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap;margin-top:6px}
-.corrupcion-content{display:grid;gap:14px;margin-top:12px}
-.corrupcion-content h2{font-size:22px;font-weight:900;margin:16px 0 6px}
-.corrupcion-content h3{font-size:18px;font-weight:800;margin:10px 0 6px}
-.corrupcion-content p{line-height:1.7}
-.corrupcion-table-wrapper{border:1px solid #2a2a38;border-radius:12px;overflow:auto;background:#0f0f15}
-.corrupcion-table{width:100%;min-width:640px;border-collapse:collapse}
-.corrupcion-table th,.corrupcion-table td{padding:10px 12px;border-bottom:1px dashed #2a2a38;text-align:left}
-.corrupcion-table thead th{position:sticky;top:0;background:#12121a;z-index:1}
-.corrupcion-download{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:10px}
-
-/* Panel oscuro elegante (pedido) */
-.mexico-panel{
-  background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
-  border-radius:22px; padding:clamp(16px,2.4vw,32px);
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06), 0 16px 30px rgba(0,0,0,.28);
+.navbar {
+  background: rgba(0, 0, 0, 0.85);
+  padding: 1rem;
+  text-align: center;
 }
-.mexico-panel h3{font-weight:800;margin:.6rem 0}
-.mexico-panel p{opacity:.92;line-height:1.7}
-.mexico-panel ul{margin:.4rem 0 .8rem 1.2rem}
+.navbar ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0;
+  margin: 0;
+}
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color .3s;
+}
+.navbar a:hover {
+  color: #00bcd4;
+}
 
-/* ==== PVD (Perú vs Dinamarca) — SIN CAMBIOS (resumen de estilos) ==== */
-.pvd-hero{position:relative;min-height:42vh;border-radius:24px;overflow:hidden;background:#0f0f15;display:grid;place-items:center}
-.pvd-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.12;pointer-events:none}
-.pvd-title{position:relative;font-weight:900;letter-spacing:.8px;font-size:clamp(28px,5vw,54px)}
-.pvd-split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2vw,28px)}
-.pvd-col{position:relative;border-radius:22px;overflow:hidden;background:#0f0f15;padding:clamp(12px,2vw,18px)}
-.bgvid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.12;pointer-events:none}
-.pvd-bullets h3{margin:.2rem 0}
-.pvd-bullets ul{margin:.3rem 0 .4rem 1rem}
-.asset{display:block;max-width:min(32vw,520px);filter:drop-shadow(0 2px 6px rgba(0,0,0,.08))}
-.asset.feather{-webkit-mask-image: radial-gradient(120% 120% at 60% 40%, #000 65%, rgba(0,0,0,0) 100%);mask-image: radial-gradient(120% 120% at 60% 40%, #000 65%, rgba(0,0,0,0) 100%)}
-.pvd-versus{border:1px solid #252535;border-radius:22px;padding:clamp(14px,2vw,20px);background:#0f0f15}
-.pvd-list{columns:2;column-gap:18px;margin:10px 0}
-.pvd-center-note{opacity:.85;margin-top:6px;font-style:italic}
+/* HOME */
+.home {
+  padding: 2rem;
+}
+.section-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+.participants-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,.3);
+  transition: transform .3s;
+}
+.card:hover {
+  transform: translateY(-5px);
+}
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+.card-body {
+  padding: 1rem;
+}
+.card-title {
+  font-weight: 800;
+  margin-bottom: .5rem;
+}
 
-/* ==== Modal, Carousel, Quiz (igual que original) — abreviado ==== */
-.modal{position:fixed;inset:0;display:none}
-.modal[aria-hidden="false"]{display:block}
-.modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px)}
-.modal-dialog{position:relative;margin:6vh auto;max-width:840px;background:#0f0f15;border:1px solid #232336;border-radius:16px;overflow:hidden}
-.modal-close{position:absolute;top:8px;right:10px}
-.carousel{position:relative;height:320px;background:#0f0f15;border-bottom:1px solid #232336;display:grid;place-items:center}
-.carousel-track{display:flex;gap:10px;overflow:auto;padding:10px}
-.carousel-nav{position:absolute;top:50%;transform:translateY(-50%)}
-.carousel-nav.prev{left:8px} .carousel-nav.next{right:8px}
+/* ACTIVIDADES */
+.activities-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 2rem;
+}
+.activity {
+  background: rgba(255,255,255,.04);
+  border-radius: 18px;
+  padding: 1rem;
+  box-shadow: 0 6px 20px rgba(0,0,0,.25);
+  flex: 1 1 280px;
+}
 
-@media (max-width: 900px){
-  .pvd-split{grid-template-columns:1fr}
-  .pvd-list{columns:1}
+/* PERÚ VS MÉXICO */
+.mexico-panel {
+  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+  border-radius: 22px;
+  padding: 2rem;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06), 0 16px 30px rgba(0,0,0,.28);
+}
+.mexico-panel h2 {font-weight: 800; font-size: 1.8rem;}
+.mexico-panel h3 {font-weight: 700; margin-top: 1.2rem;}
+.mexico-panel p, .mexico-panel li {line-height: 1.6; opacity: .9;}
+.mexico-actions {margin-top: 1rem;}
+.btn {
+  background: #00bcd4;
+  border: none;
+  padding: .8rem 1.6rem;
+  border-radius: 999px;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+.btn:hover {background: #009bb2;}
+
+/* PERÚ VS DINAMARCA */
+.dinamarca {
+  position: relative;
+  padding: 3rem;
+  overflow: hidden;
+}
+.bg-intro, .bg-loop {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0.1;
+  z-index: -1;
+}
+.dinamarca-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+}
+.col h3 {font-weight: 800;}
+.col ul {
+  background: rgba(255,255,255,.02);
+  border-radius: 16px;
+  padding: 1rem 1.5rem;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.05);
+}
+.col li {
+  margin-bottom: .5rem;
+  opacity: .92;
 }
