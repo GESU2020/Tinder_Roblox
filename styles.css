@@ -10,15 +10,6 @@
 html{scroll-behavior:smooth}
 html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Arial}
 
-/* Accesibilidad: enlace de salto */
-.skip-to-content{
-  position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden;
-}
-.skip-to-content:focus{
-  left:10px;top:10px;width:auto;height:auto;padding:8px 12px;
-  background:#12121a;border:1px solid #2a2a38;border-radius:10px;z-index:1000
-}
-
 /* Fondo canvas */
 #bgParticles{position:fixed;inset:0;z-index:-1;background:
   radial-gradient(1000px 500px at -10% -20%, rgba(255,88,100,.22), transparent 60%),
@@ -181,48 +172,34 @@ footer{margin:36px 0 24px;color:#9aa0aa;text-align:center}
 .toast{position:fixed;right:16px;bottom:16px;background:#14141b;border:1px solid #2a2a38;padding:10px 12px;border-radius:12px;box-shadow:0 12px 24px rgba(0,0,0,.35)}
 
 /* ===========================
-   NUEVO — Corrupción (scoped)
+   START: corruption-block (styles)
    =========================== */
-.corrupcion-wrap[hidden]{display:none}
-.corrupcion-header{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.corrupcion-tabs{display:flex;gap:8px;flex-wrap:wrap}
-.corrupcion-tab{
-  padding:8px 12px;border-radius:12px;border:1px solid #2a2a38;background:#12121a;cursor:pointer;
-  transition:transform .15s ease, box-shadow .25s ease, border-color .2s ease;
+.corrupcion-header{
+  display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap;margin-top:18px
 }
-.corrupcion-tab:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(123,145,255,.18);border-color:#3a3a55}
-.corrupcion-tab.is-active{background:linear-gradient(135deg,var(--a1),var(--a2));border:0}
-.corrupcion-tab:focus-visible{outline:2px solid #7b91ff;outline-offset:2px}
-
-.corrupcion-content{margin-top:14px;display:grid;gap:16px}
-.corrupcion-content h2,
-.corrupcion-content h3{letter-spacing:.2px}
-.corrupcion-content h2{font-size:22px;font-weight:900;margin:18px 0 8px}
-.corrupcion-content h3{font-size:18px;font-weight:800;margin:14px 0 6px}
-.corrupcion-content p{line-height:1.6;color:#e9e9f3}
+.corrupcion-content{
+  display:grid;gap:14px;margin-top:12px
+}
+.corrupcion-content h2{font-size:22px;font-weight:900;margin:16px 0 6px}
+.corrupcion-content h3{font-size:18px;font-weight:800;margin:10px 0 6px}
+.corrupcion-content p{line-height:1.6}
 .corrupcion-content blockquote{
-  margin:10px 0;padding:10px 12px;border-left:3px solid var(--a2);background:#12121a;border-radius:10px;color:#e9e9f3
+  margin:8px 0;padding:10px 12px;border-left:3px solid var(--a2);background:#12121a;border-radius:10px
 }
-.corrupcion-content cite{display:block;font-size:12px;opacity:.8;margin-top:4px}
+.corrupcion-content cite{display:block;font-size:12px;opacity:.75;margin-top:4px}
 
-.table-wrap{border:1px solid #2a2a38;border-radius:12px;overflow:auto;background:#0f0f15}
-.corrupcion-table{width:100%;border-collapse:collapse;min-width:640px}
-.corrupcion-table thead th{
-  position:sticky;top:0;background:#12121a;border-bottom:1px solid #2a2a38;z-index:1
-}
-.corrupcion-table th,.corrupcion-table td{padding:10px 12px;border-bottom:1px dashed #2a2a38;text-align:left}
-.corrupcion-table tbody tr:nth-child(odd){background:rgba(255,255,255,.02)}
+.corrupcion-table-wrapper{border:1px solid #2a2a38;border-radius:12px;overflow:auto;background:#0f0f15}
+.corrupcion-table{width:100%;min-width:640px;border-collapse:collapse}
+.corrupcion-table th,
+.corrupcion-table td{padding:10px 12px;border-bottom:1px dashed #2a2a38;text-align:left}
+.corrupcion-table thead th{position:sticky;top:0;background:#12121a;z-index:1}
 
-.corrupcion-downloadbar{
-  margin-top:14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap
-}
-.corrupcion-download{white-space:nowrap}
-.corrupcion-credito{opacity:.9}
+.corrupcion-download{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:10px}
+.corrupcion-author{opacity:.9}
 
-a[href^="https://doi.org"],
 a[data-doi]{text-decoration:underline dotted}
-
-/* Estados y placeholders */
-.corrupcion-content[data-state="loading"]::before{
-  content:"Cargando contenido…";opacity:.75
-}
+.corrupcion-nav:focus-visible,
+#nav-corrupcion:focus-visible{outline:2px solid #7b91ff;outline-offset:2px}
+/* ===========================
+   END: corruption-block (styles)
+   =========================== */
