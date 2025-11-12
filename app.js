@@ -740,3 +740,107 @@ function corruptionRender(json, mountEl){
 /* ==========================================================
    END: corruption-block (logic)
    ========================================================== */
+/* ==========================================================
+   START: pvd-block (Perú vs Dinamarca)
+   ========================================================== */
+
+(function(){
+  const PVD_LINKS = {
+    docx:  "https://github.com/GESU2020/Tinder_Roblox/raw/refs/heads/main/assets/downloads/EC2_Peru%20vs%20Dinamarca.docx",
+    audio: "https://github.com/GESU2020/Tinder_Roblox/raw/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/audio/Sonido%20de%20fondo.MP3"
+  };
+
+  let pvdMounted = false;
+
+  function pvdOpen(){
+    const sec = document.getElementById('peru-vs-dinamarca');
+    if(!sec) return;
+
+    if(sec.hasAttribute('hidden')) sec.removeAttribute('hidden');
+    try{ sec.scrollIntoView({behavior:'smooth', block:'start'}); }catch(_){}
+
+    // SEO básico
+    try{
+      document.title = 'Perú vs Dinamarca — Roblinder';
+      let meta = document.querySelector('meta[name="description"]');
+      if(!meta){ meta = document.createElement('meta'); meta.setAttribute('name','description'); document.head.appendChild(meta); }
+      meta.setAttribute('content','Comparativa en dos columnas con videos de fondo, imágenes paper-cut, bullets y descarga de documento.');
+    }catch(_){}
+
+    if(pvdMounted) return;
+
+    // Intro video
+    const intro = document.getElementById('pvdIntro');
+    intro && intro.play && intro.play().catch(()=>{});
+
+    // Stinger VERSUS al entrar
+    const st = document.getElementById('pvdStinger');
+    if(st){
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){
+            st.currentTime = 0;
+            st.style.opacity = 1;
+            st.play && st.play().catch(()=>{});
+            setTimeout(()=>{ st.style.opacity = 0; }, 1400);
+            io.disconnect();
+          }
+        });
+      }, { threshold:.4 });
+      const target = document.getElementById('pvdVersus') || st.parentElement;
+      target && io.observe(target);
+    }
+
+    // Audio ambiente tras primera interacción
+    const audio = document.getElementById('pvdAudio');
+    function tryStartAudio(){
+      if(!audio) return;
+      audio.volume = 0.1;
+      audio.loop = true;
+      audio.play && audio.play().catch(()=>{});
+      sec.removeEventListener('click', tryStartAudio);
+    }
+    sec.addEventListener('click', tryStartAudio, { once:true });
+
+    // Descarga con nombre dinámico
+    const input = document.getElementById('pvdName');
+    const btn = document.getElementById('pvdDownload');
+    if(btn){
+      btn.href = PVD_LINKS.docx;
+      const setName = ()=>{
+        const raw = (input && input.value || '').trim();
+        if(!raw){ btn.setAttribute('download','EC2_Peru_vs_Dinamarca.docx'); return; }
+        const clean = raw.normalize('NFKD').replace(/[^\p{L}\p{N}]+/gu,'_');
+        btn.setAttribute('download', `EC2_Peru_vs_Dinamarca_${clean}.docx`);
+      };
+      input && input.addEventListener('input', setName);
+      setName();
+    }
+
+    pvdMounted = true;
+  }
+
+  // Nav click
+  document.getElementById('nav-pvd')?.addEventListener('click', (e)=>{
+    e.preventDefault();
+    if(location.hash !== '#peru-vs-dinamarca') location.hash = '#peru-vs-dinamarca';
+    pvdOpen();
+  });
+
+  // Hash router no invasivo
+  function onHash(){
+    if(location.hash === '#peru-vs-dinamarca') pvdOpen();
+  }
+  window.addEventListener('hashchange', onHash);
+  // Inicial
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', onHash);
+  } else {
+    onHash();
+  }
+})();
+
+/* ==========================================================
+   END: pvd-block
+   ========================================================== */
+
