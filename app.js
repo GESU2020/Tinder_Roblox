@@ -1,6 +1,6 @@
 /* =========================
    Roblinder · App (Vanilla JS)
-   v2: títulos sobre imágenes + fondo animado VERSUS
+   Restaurar Inicio + rótulos pro encima de imágenes (v2)
    ========================= */
 
 /* ---------- Fondo dinámico ----------- */
@@ -38,11 +38,36 @@
 const $ = (s, r=document)=> r.querySelector(s);
 const $$ = (s, r=document)=> Array.from(r.querySelectorAll(s));
 function el(tag, attrs={}, html=''){ const n=document.createElement(tag); for(const [k,v] of Object.entries(attrs)){ if(v!=null) n.setAttribute(k, v); } if(html!==''&&html!=null) n.innerHTML=html; return n; }
-function toast(msg){ const t=el('div',{class:'toast'}); t.textContent=msg; document.body.appendChild(t); setTimeout(()=>t.remove(), 1800); }
-function parseHash(){ const h=(location.hash||'').replace(/^#/,''); if(!h) return {name:'',query:{}}; const [name, q] = h.split('?'); const query={}; if(q) new URLSearchParams(q).forEach((v,k)=> query[k]=v); return {name, query}; }
 function slugifyNombre(n){ return n.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^A-Za-z0-9]+/g,'_').replace(/^_+|_+$/g,''); }
 
-/* ---------- Deck (resumen) ---------- */
+/* ---------- 1) INICIO — render de participantes (misma fuente de datos) ---------- */
+// Reutiliza el dataset original ya presente en la app: window.PEOPLE
+function renderParticipants(data, container){
+  if(!container) return;
+  container.innerHTML = '';
+  if(!Array.isArray(data) || data.length===0){
+    container.innerHTML = `<div style="opacity:.8">No hay participantes para mostrar.</div>`;
+    return;
+  }
+  data.forEach(p=>{
+    const card = el('article',{class:'card','data-id':p.id});
+    const img = el('img',{src:(p.photos?.[0]?.url)||p.avatar, alt:p.name||'Participante'});
+    const body = el('div',{class:'card-body'});
+    const title = el('h3',{class:'card-title'}, (p.name||'Participante'));
+    const meta = el('div',{class:'card-meta'}, `${p.city??''} ${p.role?`· ${p.role}`:''}`);
+    const actions = el('div',{class:'card-actions'});
+    const b1 = el('button',{class:'btn btn-ghost'},'Ver perfil');
+    const b2 = el('button',{class:'btn btn-cta'},'Seguir');
+    b1.addEventListener('click',()=> openProfile(p.id));
+    b2.addEventListener('click',()=> {/* hook seguir */});
+    actions.append(b1,b2);
+    body.append(title,meta,actions);
+    card.append(img,body);
+    container.append(card);
+  });
+}
+
+/* ---------- Deck / secciones históricas (compat) ---------- */
 let deckIdx = 0;
 const deckShell = $('#deckShell'), dotsEl = $('#dots');
 function renderDots(){ if(!dotsEl) return; dotsEl.innerHTML = (window.PEOPLE||[]).map((_,i)=>`<span class="dot ${i===deckIdx?'active':''}"></span>`).join(''); }
@@ -75,6 +100,7 @@ $('#btnNope')?.addEventListener('click', ()=>{ flash('nope'); next(); });
 $('#btnOpen')?.addEventListener('click', ()=> openProfile((window.PEOPLE||[])[deckIdx]?.id));
 
 /* ---------- Rutas ---------- */
+function parseHash(){ const h=(location.hash||'').replace(/^#/,''); if(!h) return {name:'home',query:{}}; const [name, q] = h.split('?'); const query={}; if(q) new URLSearchParams(q).forEach((v,k)=> query[k]=v); return {name, query}; }
 function handleHash(){
   const r = parseHash();
   if(r.name==='perfil'){ openProfile(r.query.id); }
@@ -82,22 +108,27 @@ function handleHash(){
   if(r.name==='corrupcion'){ corruptionOpen(true); }
   if(r.name==='peru-vs-dinamarca'){ pvdOpen(true); }               // v1 (sin menú)
   if(r.name==='peru-vs-dinamarca-v2'){ pvdV2Open(true); }          // v2 activo
+  // home no requiere acción especial
 }
 window.addEventListener('hashchange', handleHash);
 
 /* ---------- INIT ---------- */
 function init(){
+  // Render Inicio con la fuente de datos original
+  renderParticipants(window.PEOPLE||[], document.getElementById('participantsGrid'));
+
+  // Mantener componentes históricos
   renderDeck();
   handleHash();
 
-  // Iniciar audio tras primera interacción (clic en menú)
+  // Audio tras primera interacción (clic en menú)
   let audioStarted = false;
   function startBgAudioOnce(){
     if(audioStarted) return;
     const a = $('#bgAudio');
     if(a){
       a.volume = 0.10; // 0.08–0.12
-      a.play().then(()=>{ audioStarted = true; }).catch(()=>{ /* bloqueo del navegador */ });
+      a.play().then(()=>{ audioStarted = true; }).catch(()=>{ /* bloqueo */ });
     } else {
       audioStarted = true;
     }
@@ -170,10 +201,10 @@ function corruptionOpen(){
 /* ==========================================================
    v1 (Perú vs Dinamarca) — se mantiene sin tocar (no menú)
    ========================================================== */
-function pvdOpen(){ /* no-op para no romper lo existente */ }
+function pvdOpen(){ /* no-op */ }
 
 /* ==========================================================
-   v2 — Perú vs Dinamarca (con títulos sobre imágenes + VERSUS con fondo)
+   v2 — Perú vs Dinamarca (rótulos encima + VERSUS con fondo)
    ========================================================== */
 const PV2_DOC_URL = "https://github.com/GESU2020/Tinder_Roblox/raw/refs/heads/main/assets/downloads/EC2_Peru%20vs%20Dinamarca.docx";
 let pv2Boot = false;
@@ -229,7 +260,6 @@ function pvdV2Open(fromClick=false){
     const vs = document.getElementById('versus-panel');
     const stinger = document.getElementById('versus-stinger');
     let stingerPlayed = false;
-
     if(vs && stinger && 'IntersectionObserver' in window){
       new IntersectionObserver(([e])=>{
         if(e.isIntersecting && !stingerPlayed){
@@ -263,6 +293,6 @@ function openQuiz(/*id*/){}
    Accesos rápidos teclado (deck)
    ========================================================== */
 window.addEventListener('keydown', (e)=>{
-  if(e.key==='ArrowRight'){ flash('like'); next(); }
-  if(e.key==='ArrowLeft'){ flash('nope'); prev(); }
+  if(e.key==='ArrowRight'){ const b=$('#badgeLike'); if(b){b.style.opacity=1; setTimeout(()=>b.style.opacity=0, 400);} next(); }
+  if(e.key==='ArrowLeft'){ const b=$('#badgeNope'); if(b){b.style.opacity=1; setTimeout(()=>b.style.opacity=0, 400);} prev(); }
 });
