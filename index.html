@@ -13,7 +13,6 @@
   <header>
     <nav class="nav container" role="navigation" aria-label="Principal">
       <a class="logo" href="#deck" aria-label="Inicio">
-        <!-- Logo con alturas responsivas (ver CSS) -->
         <img
           class="logo-img logo-img-new"
           src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/logo.png?v=3"
@@ -25,7 +24,7 @@
         <a class="btn btn-ghost" role="menuitem" href="#participantes">Participantes</a>
         <a class="btn btn-ghost" role="menuitem" href="#actividades">Actividades</a>
 
-        <!-- START: corruption-block (nav) -->
+        <!-- START: corruption-block (nav existente) -->
         <a
           class="btn btn-ghost corrupcion-nav"
           role="menuitem"
@@ -35,7 +34,19 @@
         >
           Corrupción
         </a>
-        <!-- END: corruption-block (nav) -->
+        <!-- END: corruption-block (nav existente) -->
+
+        <!-- START: pvd-block (nuevo ítem de menú) -->
+        <a
+          class="btn btn-ghost pvd-nav"
+          role="menuitem"
+          href="#peru-vs-dinamarca"
+          id="nav-pvd"
+          aria-controls="peru-vs-dinamarca"
+        >
+          Perú vs Dinamarca
+        </a>
+        <!-- END: pvd-block -->
       </div>
     </nav>
   </header>
@@ -70,7 +81,7 @@
       <div class="act-grid" id="actGrid"></div>
     </section>
 
-    <!-- START: corruption-block (section) -->
+    <!-- Corrupción · Perú vs México (ya existente) -->
     <section id="corrupcion" hidden aria-labelledby="nav-corrupcion">
       <header class="corrupcion-header">
         <span class="pill">Corrupción</span>
@@ -93,18 +104,122 @@
         <span id="corrupcion-author" class="corrupcion-author" aria-live="polite"></span>
       </div>
     </section>
-    <!-- END: corruption-block (section) -->
+
+    <!-- START: pvd-block (NUEVA VISTA) -->
+    <section id="peru-vs-dinamarca" class="pvd" hidden aria-labelledby="nav-pvd">
+      <!-- Sección 1: Intro con video -->
+      <header class="pvd-hero">
+        <video class="pvd-bg pvd-bg-intro" id="pvdIntro" playsinline muted preload="metadata"
+          src="https://github.com/GESU2020/Tinder_Roblox/raw/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/videos/V0%20%C2%B7%20Intro.mp4"></video>
+        <h2 class="pvd-title" aria-label="Perú vs Dinamarca">PERÚ VS DINAMARCA</h2>
+      </header>
+
+      <!-- Sección 2: Split vertical a 2 columnas -->
+      <section class="pvd-split" id="pvdSplit" aria-label="Comparativa">
+        <div class="pvd-col left">
+          <video class="bgvid" playsinline muted loop preload="metadata"
+            src="https://github.com/GESU2020/Tinder_Roblox/raw/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/videos/V2%20%C2%B7%20Fondo%20lado%20izquierdo.MP4"></video>
+
+          <div class="pvd-bullets">
+            <h3>Perú</h3>
+            <ul>
+              <li>Corrupción persistente en gestión pública</li>
+              <li>Fallas: gobernanza, transparencia, rendición de cuentas</li>
+              <li>Normalización social e impunidad</li>
+              <li>Impacto: menos servicios, más costo, menos confianza</li>
+              <li>Evidencia: revisión sistemática 2018–2024</li>
+            </ul>
+            <small class="pvd-note">“Riesgos en compras públicas y baja accountability”</small>
+          </div>
+
+          <!-- Algunas imágenes izquierda (recortes orgánicos) -->
+          <div class="pvd-assets">
+            <img class="asset feather"
+              src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/fotos_1/IZQUIERDA_1_Corrupci%C3%B3n%20persistente.png"
+              alt="Corrupción persistente (Perú)">
+            <img class="asset feather"
+              src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/fotos_1/IZQUIERDA_2_Fallas%20gobernanza%20%20transparencia%20%20rendici%C3%B3n%20de%20cuentas.png"
+              alt="Fallas de gobernanza/transparencia/rendición de cuentas">
+            <img class="asset feather"
+              src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/fotos_1/IZQUIERDA_4_Impacto%20en%20servicios%20y%20confianza.png"
+              alt="Impacto en servicios y confianza">
+          </div>
+        </div>
+
+        <div class="pvd-col right">
+          <video class="bgvid right" playsinline muted loop preload="metadata"
+            src="https://github.com/GESU2020/Tinder_Roblox/raw/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/videos/V3%20%C2%B7%20Fondo%20lado%20derecho.MP4"></video>
+
+          <div class="pvd-bullets">
+            <h3>Dinamarca</h3>
+            <ul>
+              <li>Alta integridad institucional</li>
+              <li>Burocracia meritocrática (carrera pública)</li>
+              <li>Control parlamentario + Ombudsman</li>
+              <li>Auditoría externa efectiva</li>
+              <li>Cultura cívica: confianza + cumplimiento</li>
+            </ul>
+            <small class="pvd-note">“Instituciones imparciales y control continuo”</small>
+          </div>
+
+          <!-- Algunas imágenes derecha -->
+          <div class="pvd-assets">
+            <img class="asset feather"
+              src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/fotos_1/DERECHA_1_Alta%20integridad%20institucional.png"
+              alt="Alta integridad institucional">
+            <img class="asset feather"
+              src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/fotos_1/DERECHA_3_Control%20parlamentario%20%2B%20Ombudsman.png"
+              alt="Control parlamentario y Ombudsman">
+            <img class="asset feather"
+              src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/fotos_1/DERECHA_4_Auditor%C3%ADa%20externa%20efectiva.png"
+              alt="Auditoría externa efectiva">
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección 3: VERSUS / Estrategias -->
+      <section class="pvd-versus" id="pvdVersus" aria-label="Estrategias">
+        <video class="pvd-stinger" id="pvdStinger" playsinline muted preload="metadata"
+          src="https://github.com/GESU2020/Tinder_Roblox/raw/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/videos/V4%20%C2%B7%20Stinger%20.mp4"></video>
+
+        <h3 class="pvd-sub">¿Qué hacer en Perú?</h3>
+        <ul class="pvd-list">
+          <li>Datos abiertos 360°</li>
+          <li>Servicio civil por mérito</li>
+          <li>Contraloría fuerte + plazos públicos</li>
+          <li>Ombudsman + protección a denunciantes</li>
+          <li>Sanción efectiva (celeridad + trazabilidad)</li>
+          <li>Educación cívica</li>
+          <li>Conflicto de interés / lobby regulado</li>
+          <li>Pagos electrónicos trazables</li>
+        </ul>
+        <div class="pvd-center-note">De opacidad → imparcialidad</div>
+      </section>
+
+      <!-- Sección 4: Descarga con nombre dinámico -->
+      <section class="pvd-download" aria-label="Descarga de documento">
+        <label for="pvdName" class="sr-only">Nombre del integrante</label>
+        <input id="pvdName" class="pvd-input" placeholder="Tu nombre completo" />
+        <a id="pvdDownload" class="btn btn-cta"
+           href="https://github.com/GESU2020/Tinder_Roblox/raw/refs/heads/main/assets/downloads/EC2_Peru%20vs%20Dinamarca.docx"
+           download>Descargar documento</a>
+      </section>
+
+      <!-- Audio ambiente (se inicia tras primera interacción) -->
+      <audio id="pvdAudio" preload="none"
+        src="https://github.com/GESU2020/Tinder_Roblox/raw/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/audio/Sonido%20de%20fondo.MP3"></audio>
+    </section>
+    <!-- END: pvd-block -->
 
     <footer>© 2025 · Roblinder.</footer>
   </main>
 
-  <!-- MODAL PERFIL (con carrusel) -->
+  <!-- MODAL PERFIL -->
   <section id="perfilModal" class="modal" aria-hidden="true" aria-labelledby="perfilTitle" role="dialog">
     <div class="modal-backdrop" id="modalBackdrop"></div>
     <div class="modal-dialog" id="perfilDialog" tabindex="-1">
       <button class="modal-close" id="modalClose" aria-label="Cerrar">✕</button>
 
-      <!-- Carrusel -->
       <div class="carousel" id="carousel">
         <button class="carousel-nav prev" id="carPrev" aria-label="Foto anterior">‹</button>
         <div class="carousel-track" id="carTrack"></div>
@@ -112,19 +227,16 @@
         <div class="carousel-dots" id="carDots"></div>
       </div>
 
-      <!-- Ficha -->
       <div class="profile-sheet" id="profileSheet" aria-live="polite"></div>
     </div>
   </section>
 
-  <!-- MODAL QUIZ (para todas las actividades) -->
+  <!-- MODAL QUIZ -->
   <section id="quizModal" class="modal" aria-hidden="true" role="dialog" aria-label="Quiz">
     <div class="modal-backdrop" id="quizBackdrop"></div>
     <div class="modal-dialog dialog-wide">
       <button class="modal-close" id="quizClose" aria-label="Cerrar">✕</button>
-      <div class="qf-card" id="quizCard">
-        <!-- Se inyecta dinámicamente -->
-      </div>
+      <div class="qf-card" id="quizCard"></div>
     </div>
   </section>
 
