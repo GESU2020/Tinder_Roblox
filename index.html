@@ -1,76 +1,76 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
   <title>Roblinder · Tinder x Roblox</title>
-
-  <!-- Tipografía display -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400..900&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Blog-juego del equipo · perfiles, actividades y comparativas." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="styles.css" rel="stylesheet" />
 </head>
 <body>
-  <!-- Fondo dinámico (no tapa Inicio) -->
-  <canvas id="bgParticles" aria-hidden="true"></canvas>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">R</span>
+      <strong>Roblinder</strong>
+    </div>
 
-  <header>
-    <nav class="nav container" role="navigation" aria-label="Principal">
-      <a class="logo" href="#home" aria-label="Inicio">
-        <img
-          class="logo-img logo-img-new"
-          src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/logo.png?v=5"
-          alt="Logo Roblinder"
-        />
-      </a>
-      <div class="nav-links" role="menubar">
-        <!-- ✅ Inicio ahora apunta a #home -->
-        <a class="btn btn-ghost" role="menuitem" href="#home">Inicio</a>
+    <nav class="nav" role="menubar" aria-label="Navegación principal">
+      <div class="group">
+        <a class="btn btn-ghost" role="menuitem" href="#deck">Inicio</a>
         <a class="btn btn-ghost" role="menuitem" href="#participantes">Participantes</a>
         <a class="btn btn-ghost" role="menuitem" href="#actividades">Actividades</a>
+      </div>
 
-        <!-- Perú vs México (visor Office + fallback) -->
+      <div class="group">
+        <!-- Corrupción / Perú vs México -->
         <a
           class="btn btn-ghost corrupcion-nav"
+          id="nav-corrupcion"
           role="menuitem"
           href="#corrupcion"
-          id="nav-corrupcion"
           aria-controls="corrupcion"
         >
           Perú vs México
         </a>
 
-        <!-- Perú vs Dinamarca (v2 renombrado a “Perú vs Dinamarca”) -->
+        <!-- START: pvd-block (nav item) — SIN CAMBIOS -->
         <a
-          class="btn btn-ghost pvd2-nav"
+          class="btn btn-ghost pvd-nav"
           role="menuitem"
-          href="#peru-vs-dinamarca-v2"
-          id="nav-pvd2"
-          aria-controls="peru-vs-dinamarca-v2"
+          href="#peru-vs-dinamarca"
+          id="nav-pvd"
+          aria-controls="peru-vs-dinamarca"
         >
           Perú vs Dinamarca
         </a>
+        <!-- END: pvd-block (nav item) -->
       </div>
     </nav>
   </header>
 
   <main class="container route-wrap">
-    <!-- =========================
-         1) INICIO — grilla participantes
-         ========================= -->
-    <section id="home" class="home route-section" aria-label="Inicio">
-      <h2 class="section-title">Participantes</h2>
-      <div id="participantsGrid" class="participants-grid"><!-- cards aquí --></div>
+    <!-- INICIO / DECK (igual que original) -->
+    <section id="deck" class="route-section">
+      <div class="deck-shell glow" id="deckShell" aria-live="polite">
+        <div class="dots" id="dots"></div>
+        <div class="zone left" id="zoneLeft" aria-label="Anterior"></div>
+        <div class="zone right" id="zoneRight" aria-label="Siguiente"></div>
+      </div>
+      <div class="deck-cta">
+        <button class="btn" id="btnNope">NOPE</button>
+        <button class="btn btn-cta" id="btnLike">LIKE</button>
+        <button class="btn btn-ghost" id="btnOpen">Ver perfil</button>
+      </div>
     </section>
 
-    <!-- PARTICIPANTES (se mantiene por compatibilidad) -->
+    <!-- PARTICIPANTES (restaurado) -->
     <section id="participantes" class="route-section">
       <h2 class="section-title"><span class="tag">Equipo</span> Participantes</h2>
       <div id="peopleMasonry" class="masonry"></div>
     </section>
 
-    <!-- ACTIVIDADES -->
+    <!-- ACTIVIDADES (restaurado) -->
     <section id="actividades" class="route-section">
       <div class="act-head">
         <h2 class="section-title" style="margin:0"><span class="tag">Juego</span> Actividades a realizar</h2>
@@ -79,258 +79,221 @@
       <div class="act-grid" id="actGrid"></div>
     </section>
 
-    <!-- ====== Perú vs México — visor Office (iframe + fallback) ====== -->
+    <!-- START: corruption-block (section) — REHECHO: TEXTO EN PÁGINA + DESCARGA -->
     <section id="corrupcion" hidden aria-labelledby="nav-corrupcion">
       <header class="corrupcion-header">
         <span class="pill">Corrupción</span>
-        <h2>Perú vs México — Informe</h2>
+        <h2>Perú vs. México — Informe</h2>
       </header>
 
+      <!-- Contenido escrito en HTML (oscuro), sin visor/iframe -->
       <div id="corrupcion-content" class="corrupcion-content" aria-live="polite">
-        <div class="doc-embed" id="corrupcion-iframe-wrap">
-          <iframe id="corrupcion-iframe" title="Informe Perú vs México (Office Online)" allowfullscreen referrerpolicy="no-referrer"></iframe>
-          <div class="doc-fallback" id="corrupcion-fallback" hidden>
-            <p>No se pudo embeber el documento. <a id="corrupcion-fallback-link" target="_blank" rel="noopener">Ábrelo en una nueva pestaña</a>.</p>
+        <section class="mexico-panel">
+          <h3>Introducción</h3>
+          <p>
+            Este informe compara la problemática de la corrupción en Perú y México desde un enfoque
+            histórico, político, económico y social, vinculando los hallazgos con actividades sincrónicas
+            (S9–S11) y perspectivas teóricas recientes. Se prioriza la claridad visual y la lectura directa
+            en el sitio, evitando visores incrustados.
+          </p>
+
+          <h3>Metodología</h3>
+          <ul>
+            <li>Revisión selectiva de literatura y reportes institucionales (2018–2024).</li>
+            <li>Clasificación por dimensiones (histórica, política, económica y social).</li>
+            <li>Contraste cualitativo entre Perú y México con énfasis en rendición de cuentas.</li>
+          </ul>
+
+          <h3>Hallazgos principales</h3>
+          <ul>
+            <li>La percepción de corrupción reduce la confianza ciudadana y el apoyo a políticas públicas.</li>
+            <li>Persisten riesgos en compras/obras y brechas en profesionalización del servicio civil.</li>
+            <li>La normalización social de prácticas informales favorece impunidad y baja accountability.</li>
+          </ul>
+
+          <div class="corrupcion-table-wrapper">
+            <table class="corrupcion-table">
+              <thead>
+                <tr>
+                  <th>Dimensión</th>
+                  <th>Perú</th>
+                  <th>México</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Histórica</td>
+                  <td>Inestabilidad institucional; redes clientelares.</td>
+                  <td>Patrones persistentes y variaciones regionales.</td>
+                </tr>
+                <tr>
+                  <td>Política</td>
+                  <td>Débil rendición de cuentas; captura de instituciones.</td>
+                  <td>Percepción elevada; presión social por reformas.</td>
+                </tr>
+                <tr>
+                  <td>Económica</td>
+                  <td>Sobreprecios y baja eficiencia en inversión pública.</td>
+                  <td>Costos de transacción altos; desconfianza en procesos.</td>
+                </tr>
+                <tr>
+                  <td>Social</td>
+                  <td>Tolerancia a “viveza”; baja denuncia.</td>
+                  <td>Desconfianza generalizada; participación desigual.</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-        </div>
+
+          <h3>Estrategias recomendadas</h3>
+          <ul>
+            <li>Datos abiertos transaccionales 360° (compras, obras, hitos y pagos).</li>
+            <li>Servicio civil meritocrático (ingreso/ascenso por mérito, control de nepotismo).</li>
+            <li>Auditorías con plazos públicos y seguimiento ciudadano.</li>
+            <li>Ombudsman operativo y protección real a denunciantes.</li>
+            <li>Sanción efectiva con trazabilidad y celeridad procesal.</li>
+            <li>Educación cívica y normas anti-“vivo”.</li>
+          </ul>
+        </section>
       </div>
 
       <div class="corrupcion-download" role="group" aria-label="Descarga">
-        <a id="corrupcion-download" class="btn btn-cta" href="#" download>Descargar DOCX</a>
+        <a
+          id="corrupcion-download"
+          class="btn btn-cta"
+          href="https://github.com/GESU2020/Tinder_Roblox/raw/refs/heads/main/assets/downloads/EC2_Peru%20vs%20Mexico.docx"
+          download
+        >
+          Descargar documento
+        </a>
+        <!-- Autor oculto/omitido para no mostrar líneas residuales -->
       </div>
     </section>
+    <!-- END: corruption-block (section) -->
 
-    <!-- (v1) Sección anterior: se mantiene oculta para no romper nada -->
-    <section id="peru-vs-dinamarca" hidden aria-labelledby="nav-pvd">
-      <!-- (v1 intacto, sin cambios) -->
-    </section>
+    <!-- START: pvd-block (Perú vs Dinamarca) — SIN CAMBIOS -->
+    <section id="peru-vs-dinamarca" class="pvd" hidden aria-labelledby="nav-pvd">
+      <!-- Sección 1: Intro con video -->
+      <header class="pvd-hero">
+        <video class="pvd-bg pvd-bg-intro" id="pvdIntro" playsinline muted preload="metadata"
+          src="https://github.com/GESU2020/Tinder_Roblox/raw/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/videos/V0%20%C2%B7%20Intro.mp4"></video>
+        <h2 class="pvd-title" aria-label="Perú vs Dinamarca">PERÚ VS DINAMARCA</h2>
+      </header>
 
-    <!-- ============ v2 Perú vs Dinamarca — títulos pro encima de imágenes ============ -->
-    <section id="peru-vs-dinamarca-v2" hidden aria-labelledby="nav-pvd2">
-      <!-- §1 · HERO (título pro) + V0 de fondo -->
-      <section class="pv2-hero" aria-label="Introducción">
-        <video
-          class="pv2-video bg"
-          id="pv2-v0"
-          src="https://github.com/GESU2020/Tinder_Roblox/raw/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/videos/V0%20%C2%B7%20Intro.mp4"
-          autoplay muted playsinline loop
-        ></video>
-        <div class="pv2-hero-overlay">
-          <h1 class="pv2-title" aria-label="PERÚ VS DINAMARCA">PERÚ VS DINAMARCA</h1>
-        </div>
-      </section>
+      <!-- Sección 2: Split vertical a 2 columnas -->
+      <section class="pvd-split" id="pvdSplit" aria-label="Comparativa">
+        <div class="pvd-col left">
+          <video class="bgvid" playsinline muted loop preload="metadata"
+            src="https://github.com/GESU2020/Tinder_Roblox/raw/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/videos/V2%20%C2%B7%20Fondo%20lado%20izquierdo.MP4"></video>
 
-      <!-- §2 · Grid 2 columnas (Perú / Dinamarca) con rótulos “glass” arriba -->
-      <section class="pv2-grid" id="pv2-grid" aria-label="Comparativa en dos columnas">
-        <!-- Izquierda (Perú) -->
-        <div class="pv2-col pv2-left" id="pv2-left">
-          <video
-            class="pv2-video under"
-            id="pv2-v2"
-            src="https://github.com/GESU2020/Tinder_Roblox/raw/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/videos/V2%20%C2%B7%20Fondo%20lado%20izquierdo.MP4"
-            autoplay muted playsinline loop
-          ></video>
+          <div class="pvd-bullets">
+            <h3>Perú</h3>
+            <ul>
+              <li>Corrupción persistente en gestión pública</li>
+              <li>Fallas: gobernanza, transparencia, rendición de cuentas</li>
+              <li>Normalización social e impunidad</li>
+              <li>Impacto: menos servicios, más costo, menos confianza</li>
+              <li>Evidencia: revisión sistemática 2018–2024</li>
+            </ul>
+            <small class="pvd-note">“Riesgos en compras públicas y baja accountability”</small>
+          </div>
 
-          <div class="pv2-pane">
-            <h3 class="pv2-col-title">Perú · Problema</h3>
-            <div class="pv2-pairs">
-              <figure class="card-figure">
-                <figcaption class="badge-cap">Corrupción persistente en gestión pública</figcaption>
-                <img class="card-image" alt="Corrupción persistente en gestión pública"
-                  src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/fotos_1/IZQUIERDA_1_Corrupci%C3%B3n%20persistente.png">
-              </figure>
-
-              <figure class="card-figure">
-                <figcaption class="badge-cap">Fallas: gobernanza, transparencia y rendición de cuentas</figcaption>
-                <img class="card-image" alt="Fallas: gobernanza, transparencia y rendición de cuentas"
-                  src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/fotos_1/IZQUIERDA_2_Fallas%20gobernanza%20%20transparencia%20%20rendici%C3%B3n%20de%20cuentas.png">
-              </figure>
-
-              <figure class="card-figure">
-                <figcaption class="badge-cap">Normalización social e impunidad</figcaption>
-                <img class="card-image" alt="Normalización social e impunidad"
-                  src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/fotos_1/IZQUIERDA_3_Normalizaci%C3%B3nimpunidad.png">
-              </figure>
-
-              <figure class="card-figure">
-                <figcaption class="badge-cap">Impacto: menos servicios, más costo, menos confianza</figcaption>
-                <img class="card-image" alt="Impacto en servicios y confianza"
-                  src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/fotos_1/IZQUIERDA_4_Impacto%20en%20servicios%20y%20confianza.png">
-              </figure>
-
-              <figure class="card-figure">
-                <figcaption class="badge-cap">Evidencia: revisión sistemática 2018–2024</figcaption>
-                <img class="card-image" alt="Evidencia: revisión sistemática 2018–2024"
-                  src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/fotos_1/IZQUIERDA_5_Evidencia%20(revisi%C3%B3n%20sistem%C3%A1tica).png">
-              </figure>
-            </div>
+          <div class="pvd-assets">
+            <img class="asset feather"
+              src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/fotos_1/IZQUIERDA_1_Corrupci%C3%B3n%20persistente.png"
+              alt="Corrupción persistente (Perú)">
+            <img class="asset feather"
+              src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/fotos_1/IZQUIERDA_2_Fallas%20gobernanza%20%20transparencia%20%20rendici%C3%B3n%20de%20cuentas.png"
+              alt="Fallas de gobernanza/transparencia/rendición de cuentas">
+            <img class="asset feather"
+              src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/fotos_1/IZQUIERDA_4_Impacto%20en%20servicios%20y%20confianza.png"
+              alt="Impacto en servicios y confianza">
           </div>
         </div>
 
-        <!-- Derecha (Dinamarca) -->
-        <div class="pv2-col pv2-right" id="pv2-right">
-          <video
-            class="pv2-video under"
-            id="pv2-v3"
-            src="https://github.com/GESU2020/Tinder_Roblox/raw/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/videos/V3%20%C2%B7%20Fondo%20lado%20derecho.MP4"
-            autoplay muted playsinline loop
-          ></video>
+        <div class="pvd-col right">
+          <video class="bgvid right" playsinline muted loop preload="metadata"
+            src="https://github.com/GESU2020/Tinder_Roblox/raw/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/videos/V3%20%C2%B7%20Fondo%20lado%20derecho.MP4"></video>
 
-          <div class="pv2-pane">
-            <h3 class="pv2-col-title">Dinamarca · Modelo</h3>
-            <div class="pv2-pairs">
-              <figure class="card-figure">
-                <figcaption class="badge-cap">Alta integridad institucional</figcaption>
-                <img class="card-image" alt="Alta integridad institucional"
-                  src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/fotos_1/DERECHA_1_Alta%20integridad%20institucional.png">
-              </figure>
+          <div class="pvd-bullets">
+            <h3>Dinamarca</h3>
+            <ul>
+              <li>Alta integridad institucional</li>
+              <li>Burocracia meritocrática (carrera pública)</li>
+              <li>Control parlamentario + Ombudsman</li>
+              <li>Auditoría externa efectiva</li>
+              <li>Cultura cívica: confianza + cumplimiento</li>
+            </ul>
+            <small class="pvd-note">“Instituciones imparciales y control continuo”</small>
+          </div>
 
-              <figure class="card-figure">
-                <figcaption class="badge-cap">Burocracia meritocrática (carrera pública)</figcaption>
-                <img class="card-image" alt="Burocracia meritocrática (carrera pública)"
-                  src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/fotos_1/DERECHA_2_Burocracia%20meritocr%C3%A1tica.png">
-              </figure>
-
-              <figure class="card-figure">
-                <figcaption class="badge-cap">Control parlamentario y Ombudsman</figcaption>
-                <img class="card-image" alt="Control parlamentario y Ombudsman"
-                  src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/fotos_1/DERECHA_3_Control%20parlamentario%20%2B%20Ombudsman.png">
-              </figure>
-
-              <figure class="card-figure">
-                <figcaption class="badge-cap">Auditoría externa efectiva</figcaption>
-                <img class="card-image" alt="Auditoría externa efectiva"
-                  src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/fotos_1/DERECHA_4_Auditor%C3%ADa%20externa%20efectiva.png">
-              </figure>
-
-              <figure class="card-figure">
-                <figcaption class="badge-cap">Cultura cívica: confianza y cumplimiento</figcaption>
-                <img class="card-image" alt="Cultura cívica: confianza y cumplimiento"
-                  src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/fotos_1/DERECHA_5_Cultura%20c%C3%ADvica%20(confianza%20%2B%20cumplimiento).png">
-              </figure>
-            </div>
+          <div class="pvd-assets">
+            <img class="asset feather"
+              src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/fotos_1/DERECHA_1_Alta%20integridad%20institucional.png"
+              alt="Alta integridad institucional">
+            <img class="asset feather"
+              src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/fotos_1/DERECHA_3_Control%20parlamentario%20%2B%20Ombudsman.png"
+              alt="Control parlamentario y Ombudsman">
+            <img class="asset feather"
+              src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/fotos_1/DERECHA_4_Auditor%C3%ADa%20externa%20efectiva.png"
+              alt="Auditoría externa efectiva">
           </div>
         </div>
       </section>
 
-      <!-- §3 · VERSUS con fondo animado + stinger al entrar -->
-      <section class="pv2-versus" id="pv2-versus" aria-label="Estrategias para Perú">
-        <h3 class="pv2-versus-title">VERSUS → ¿Qué hacer en Perú?</h3>
+      <!-- Sección 3: VERSUS / Estrategias -->
+      <section class="pvd-versus" id="pvdVersus" aria-label="Estrategias">
+        <video class="pvd-stinger" id="pvdStinger" playsinline muted preload="metadata"
+          src="https://github.com/GESU2020/Tinder_Roblox/raw/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/videos/V4%20%C2%B7%20Stinger%20.mp4"></video>
 
-        <section id="versus-panel" class="versus">
-          <!-- Fondo animado (loop sutil) -->
-          <video class="versus-bg"
-            src="https://github.com/GESU2020/Tinder_Roblox/raw/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/videos/V2%20%C2%B7%20Fondo%20lado%20izquierdo.MP4"
-            autoplay muted loop playsinline></video>
-
-          <!-- Stinger V4 (1 sola vez al entrar) -->
-          <video
-            class="pv2-stinger"
-            id="versus-stinger"
-            src="https://github.com/GESU2020/Tinder_Roblox/raw/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/videos/V4%20%C2%B7%20Stinger%20.mp4"
-            playsinline
-          ></video>
-
-          <!-- Grid 2×4 con rótulos “glass” encima -->
-          <div class="versus-grid">
-            <figure class="card-figure">
-              <figcaption class="badge-cap">Datos abiertos 360°</figcaption>
-              <img class="card-image" alt="Datos abiertos 360°"
-                   src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/fotos_1/CENTRO_1_Datos%20abiertos%20360%C2%B0.png">
-            </figure>
-
-            <figure class="card-figure">
-              <figcaption class="badge-cap">Servicio civil meritocrático</figcaption>
-              <img class="card-image" alt="Servicio civil meritocrático"
-                   src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/fotos_1/CENTRO_2_Servicio%20civil%20por%20m%C3%A9rito.png">
-            </figure>
-
-            <figure class="card-figure">
-              <figcaption class="badge-cap">Contraloría fuerte y plazos públicos</figcaption>
-              <img class="card-image" alt="Contraloría fuerte y plazos públicos"
-                   src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/fotos_1/CENTRO_3_Contralor%C3%ADa%20fuerte%20%20auditor%C3%ADas%20con%20plazos.png">
-            </figure>
-
-            <figure class="card-figure">
-              <figcaption class="badge-cap">Ombudsman y protección a denunciantes</figcaption>
-              <img class="card-image" alt="Ombudsman y protección a denunciantes"
-                   src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/fotos_1/CENTRO_4_Ombudsman%20%2B%20protecci%C3%B3n%20al%20denunciante.png">
-            </figure>
-
-            <figure class="card-figure">
-              <figcaption class="badge-cap">Sanción efectiva (celeridad y trazabilidad)</figcaption>
-              <img class="card-image" alt="Sanción efectiva (celeridad y trazabilidad)"
-                   src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/fotos_1/CENTRO_5_Sanci%C3%B3n%20efectiva%20%20celeridad.png">
-            </figure>
-
-            <figure class="card-figure">
-              <figcaption class="badge-cap">Educación cívica</figcaption>
-              <img class="card-image" alt="Educación cívica"
-                   src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/fotos_1/CENTRO_6_Educaci%C3%B3n%20c%C3%ADvica.png">
-            </figure>
-
-            <figure class="card-figure">
-              <figcaption class="badge-cap">Conflicto de interés y lobby regulado</figcaption>
-              <img class="card-image" alt="Conflicto de interés y lobby regulado"
-                   src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/fotos_1/CENTRO_7_Conflicto%20de%20inter%C3%A9s%20%20lobby%20regulado.png">
-            </figure>
-
-            <figure class="card-figure">
-              <figcaption class="badge-cap">Pagos electrónicos trazables</figcaption>
-              <img class="card-image" alt="Pagos electrónicos trazables"
-                   src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/fotos_1/CENTRO_8_Pagos%20electr%C3%B3nicos%20trazables.png">
-            </figure>
-          </div>
-        </section>
-      </section>
-
-      <!-- §4 · Descarga + Audio -->
-      <section class="pv2-download" aria-label="Documento y descarga">
-        <audio id="bgAudio"
-               src="https://github.com/GESU2020/Tinder_Roblox/raw/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/audio/Sonido%20de%20fondo.MP3"
-               preload="auto"
-               loop
-        ></audio>
-
-        <label class="pv2-label" for="nombreIntegranteV2">Nombre del integrante</label>
-        <input id="nombreIntegranteV2" class="pv2-input"
-               value="Gesú Billy Castañeda Ore"
-               placeholder="Tu nombre completo" />
-
-        <button id="pv2-download" class="btn btn-cta">
-          Descargar documento
-        </button>
+        <h3 class="pvd-sub">¿Qué hacer en Perú?</h3>
+        <ul class="pvd-list">
+          <li>Datos abiertos 360°</li>
+          <li>Servicio civil por mérito</li>
+          <li>Contraloría fuerte + plazos públicos</li>
+          <li>Ombudsman + protección a denunciantes</li>
+          <li>Sanción efectiva (celeridad + trazabilidad)</li>
+          <li>Educación cívica</li>
+          <li>Conflicto de interés / lobby regulado</li>
+          <li>Pagos electrónicos trazables</li>
+        </ul>
+        <div class="pvd-center-note">De opacidad → imparcialidad</div>
       </section>
     </section>
+    <!-- END: pvd-block (Perú vs Dinamarca) -->
 
     <footer>© 2025 · Roblinder.</footer>
   </main>
 
-  <!-- MODALES (se mantienen para compatibilidad) -->
+  <!-- MODAL PERFIL + CARRUSEL + QUIZ (como original) -->
   <section id="perfilModal" class="modal" aria-hidden="true" aria-labelledby="perfilTitle" role="dialog">
     <div class="modal-backdrop" id="modalBackdrop"></div>
     <div class="modal-dialog" id="perfilDialog" tabindex="-1">
       <button class="modal-close" id="modalClose" aria-label="Cerrar">✕</button>
 
+      <!-- Carrusel -->
       <div class="carousel" id="carousel">
         <button class="carousel-nav prev" id="carPrev" aria-label="Foto anterior">‹</button>
         <div class="carousel-track" id="carTrack"></div>
         <button class="carousel-nav next" id="carNext" aria-label="Foto siguiente">›</button>
-        <div class="carousel-dots" id="carDots"></div>
       </div>
 
-      <div class="profile-sheet" id="profileSheet" aria-live="polite"></div>
+      <div class="modal-body">
+        <h3 id="perfilTitle" class="perfil-title"></h3>
+        <div class="perfil-meta" id="perfilMeta"></div>
+        <div class="perfil-desc" id="perfilDesc"></div>
+      </div>
     </div>
   </section>
 
-  <section id="quizModal" class="modal" aria-hidden="true" role="dialog" aria-label="Quiz">
+  <section id="quizModal" class="modal" aria-hidden="true" aria-labelledby="quizTitle" role="dialog">
     <div class="modal-backdrop" id="quizBackdrop"></div>
-    <div class="modal-dialog dialog-wide">
+    <div class="modal-dialog" id="quizDialog" tabindex="-1">
       <button class="modal-close" id="quizClose" aria-label="Cerrar">✕</button>
-      <div class="qf-card" id="quizCard"></div>
+      <div id="quizShell"></div>
     </div>
   </section>
 
-  <script src="app.js" defer></script>
+  <script src="app.js"></script>
 </body>
 </html>
