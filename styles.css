@@ -203,3 +203,63 @@ a[data-doi]{text-decoration:underline dotted}
 /* ===========================
    END: corruption-block (styles)
    =========================== */
+
+/* ==========================================================
+   START: pvd-block (Perú vs Dinamarca)
+   ========================================================== */
+
+.pvd { display:block; margin-top:28px }
+.pvd-hero { position:relative; min-height:240px; display:grid; place-items:center; border-radius:22px;
+  border:1px solid #2a2a38; overflow:hidden; background:#0f0f15; }
+.pvd-bg { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.12; pointer-events:none }
+.pvd-title { position:relative; z-index:1; font-weight:900; letter-spacing:.6px; font-size:clamp(26px, 4vw, 44px) }
+
+.pvd-split { position:relative; margin-top:18px; display:grid; grid-template-columns:1fr 1fr; gap:16px }
+@media(max-width:980px){ .pvd-split{ grid-template-columns:1fr; } }
+.pvd-col { position:relative; min-height:420px; border-radius:22px; overflow:hidden; border:1px solid #2a2a38; background:#0f0f15 }
+.pvd-col .bgvid{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.12; pointer-events:none }
+.pvd-col .bgvid.right{ transform:scaleX(-1) }
+
+.pvd-bullets { position:relative; z-index:1; padding:18px }
+.pvd-bullets h3{ margin:0 0 8px; font-weight:900 }
+.pvd-bullets ul{ margin:0; padding-left:18px; display:grid; gap:6px }
+.pvd-note{ display:block; opacity:.8; margin-top:10px; font-size:12px }
+
+.pvd-assets{ position:relative; z-index:1; display:flex; flex-wrap:wrap; gap:12px; padding:12px }
+.asset{ display:block; max-width:min(32vw, 420px); height:auto; filter:drop-shadow(0 2px 6px rgba(0,0,0,.08)); }
+.asset.feather{
+  -webkit-mask-image: radial-gradient(120% 120% at 60% 40%, #000 65%, rgba(0,0,0,0) 100%);
+          mask-image: radial-gradient(120% 120% at 60% 40%, #000 65%, rgba(0,0,0,0) 100%);
+}
+
+.pvd-versus{ position:relative; margin-top:18px; border-radius:22px; border:1px solid #2a2a38; padding:18px; background:#0f0f15 }
+.pvd-stinger{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; pointer-events:none }
+.pvd-sub{ margin:0 0 10px; font-weight:900 }
+.pvd-list{ margin:0; padding-left:18px; display:grid; gap:6px }
+.pvd-center-note{ margin-top:10px; font-weight:700; opacity:.85 }
+
+.pvd-download{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:18px }
+.pvd-input{
+  padding:10px 12px; border-radius:12px; background:#12121a; border:1px solid #2a2a38; color:#fff; min-width:240px
+}
+
+/* Split vertical (reveal) */
+.pvd-col.left { clip-path: inset(0 50% 0 0); animation: pvd-reveal-left .6s ease both; }
+.pvd-col.right{ clip-path: inset(0 0 0 50%); animation: pvd-reveal-right .6s ease .1s both; }
+
+@keyframes pvd-reveal-left {
+  from { clip-path: inset(0 100% 0 0) }
+  to   { clip-path: inset(0 50% 0 0) }
+}
+@keyframes pvd-reveal-right {
+  from { clip-path: inset(0 0 0 100%) }
+  to   { clip-path: inset(0 0 0 50%) }
+}
+
+/* Accesibilidad */
+.sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0 }
+
+/* ==========================================================
+   END: pvd-block
+   ========================================================== */
+
