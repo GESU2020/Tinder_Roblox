@@ -1,16 +1,90 @@
+:root{
+  --bg:#0e0e12; --card:#14141b; --muted:#9aa0aa; --text:#e6e8ee; --soft:#c7ccda;
+  --primary:#b18cff; --primary-2:#a071ff; --accent:#ff8f94; --good:#66d399; --bad:#ff7b8a;
+  --glass: rgba(255,255,255,.06);
+  --line: #2a2a38;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+  --radius: 18px;
+  --radius-lg: 22px;
+  --radius-xl: 26px;
+  --g1:#2a2140; --g2:#34235f; --g3:#27213a;
+}
+
+/* Reset y base */
+*{box-sizing:border-box}
+html,body{margin:0; padding:0; background:var(--bg); color:var(--text); font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale}
+img{max-width:100%; display:block}
+a{color:inherit; text-decoration:none}
+.container{max-width:1200px; margin:0 auto; padding:0 18px}
+.tag{display:inline-block; padding:6px 10px; border-radius:999px; background:#1a1a23; border:1px solid var(--line); font-size:12px; opacity:.9}
+.section-title{font-size:clamp(22px, 3.6vw, 34px); margin:0 0 10px; letter-spacing:.2px}
+.btn{display:inline-flex; align-items:center; gap:10px; padding:10px 16px; border-radius:14px; border:1px solid var(--line); background:#181820; cursor:pointer; color:var(--text); transition:all .16s ease; box-shadow:none}
+.btn:hover{transform:translateY(-1px)}
+.btn-ghost{background:transparent}
+.btn-cta{background:linear-gradient(135deg, #ff6e7f, #bfe9ff); color:#0b0b0b; font-weight:700; border:none; box-shadow:0 12px 30px rgba(255,110,127,.15)}
+.pill{display:inline-block; padding:6px 10px; border:1px solid var(--line); border-radius:999px; background:#101018; opacity:.9}
+
+header{position:sticky; top:0; z-index:30; background:rgba(14,14,18,.6); backdrop-filter: blur(6px); border-bottom:1px solid rgba(255,255,255,.05)}
+.nav{display:flex; align-items:center; gap:18px; min-height:64px}
+.logo{display:flex; align-items:center; gap:10px; font-weight:900; letter-spacing:.4px}
+.logo-img{height:28px; width:auto}
+.nav-links{margin-left:auto; display:flex; align-items:center; gap:10px}
+.nav .btn-ghost{border-color:rgba(255,255,255,.06)}
+.nav .btn-ghost:hover{background:rgba(255,255,255,.04)}
+
+.route-wrap{padding:20px 0 40px}
+.route-section{margin:24px 0}
+
+.deck-shell{position:relative; min-height:420px; border-radius:var(--radius-lg); border:1px solid var(--line); background:#12121a; box-shadow:var(--shadow); overflow:hidden}
+.glow{box-shadow:0 10px 40px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.02)}
+.zone{position:absolute; top:0; bottom:0; width:20%}
+.zone.left{left:0}
+.zone.right{right:0}
+.dots{position:absolute; inset:0; pointer-events:none; opacity:.5}
+
+.deck-cta{display:flex; gap:12px; justify-content:center; padding:14px 0}
+.masonry{display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:14px}
+
+.act-head{display:flex; justify-content:space-between; align-items:end; gap:10px; margin-bottom:10px}
+.act-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:16px}
+
+/* Corrupción (Perú vs México existente) */
+.corrupcion-header{display:flex; align-items:center; gap:10px}
+.corrupcion-content{margin-top:10px}
+.corrupcion-loading{opacity:.85}
+.corrupcion-download{display:flex; gap:10px; align-items:center; margin-top:14px; flex-wrap:wrap}
+.corrupcion-author{opacity:.9}
+
+/* Modal genérico */
+.modal{position:fixed; inset:0; display:none}
+.modal[aria-hidden="false"]{display:block}
+.modal-backdrop{position:absolute; inset:0; background:rgba(0,0,0,.55); backdrop-filter: blur(3px)}
+.modal-dialog{position:relative; width:min(980px, 92vw); margin:6vh auto; background:var(--card); border-radius:var(--radius-lg); border:1px solid var(--line); box-shadow:var(--shadow); padding:14px}
+.modal .dialog-wide{width:min(1080px, 94vw)}
+.modal-close{position:absolute; top:8px; right:8px; background:#171721; border:1px solid var(--line); border-radius:10px; color:#d7d9df; cursor:pointer; padding:6px 10px}
+
+/* Carousel y perfil (placeholder base del sitio) */
+.carousel{position:relative; border-radius:var(--radius); border:1px solid var(--line); overflow:hidden; background:#12121a; min-height:220px}
+.carousel-nav{position:absolute; top:50%; transform:translateY(-50%); background:#11111a; border:1px solid var(--line); color:#eaeaf2; padding:4px 10px; border-radius:10px; cursor:pointer}
+.carousel-nav.prev{left:6px}
+.carousel-nav.next{right:6px}
+.carousel-track{display:flex; gap:10px; padding:10px}
+.carousel-dots{position:absolute; bottom:8px; left:0; right:0; display:flex; justify-content:center; gap:6px}
+.profile-sheet{margin-top:12px; border:1px solid var(--line); border-radius:var(--radius); padding:10px; background:#12121a}
+
 /* ==========================================================
    START: pvd-block (Perú vs Dinamarca)
    ========================================================== */
 
 .pvd { display:block; margin-top:28px }
 .pvd-hero { position:relative; min-height:240px; display:grid; place-items:center; border-radius:22px;
-  border:1px solid #2a2a38; overflow:hidden; background:#0f0f15; }
+  border:1px solid var(--line); overflow:hidden; background:#0f0f15; }
 .pvd-bg { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.12; pointer-events:none }
 .pvd-title { position:relative; z-index:1; font-weight:900; letter-spacing:.6px; font-size:clamp(26px, 4vw, 44px) }
 
 .pvd-split { position:relative; margin-top:18px; display:grid; grid-template-columns:1fr 1fr; gap:16px }
 @media(max-width:980px){ .pvd-split{ grid-template-columns:1fr; } }
-.pvd-col { position:relative; min-height:420px; border-radius:22px; overflow:hidden; border:1px solid #2a2a38; background:#0f0f15 }
+.pvd-col { position:relative; min-height:420px; border-radius:22px; overflow:hidden; border:1px solid var(--line); background:#0f0f15 }
 .pvd-col .bgvid{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.12; pointer-events:none }
 .pvd-col .bgvid.right{ transform:scaleX(-1) }
 
@@ -26,7 +100,7 @@
           mask-image: radial-gradient(120% 120% at 60% 40%, #000 65%, rgba(0,0,0,0) 100%);
 }
 
-.pvd-versus{ position:relative; margin-top:18px; border-radius:22px; border:1px solid #2a2a38; padding:18px; background:#0f0f15 }
+.pvd-versus{ position:relative; margin-top:18px; border-radius:22px; border:1px solid var(--line); padding:18px; background:#0f0f15 }
 .pvd-stinger{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; pointer-events:none }
 .pvd-sub{ margin:0 0 10px; font-weight:900 }
 .pvd-list{ margin:0; padding-left:18px; display:grid; gap:6px }
@@ -34,7 +108,7 @@
 
 .pvd-download{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:18px }
 .pvd-input{
-  padding:10px 12px; border-radius:12px; background:#12121a; border:1px solid #2a2a38; color:#fff; min-width:240px
+  padding:10px 12px; border-radius:12px; background:#12121a; border:1px solid var(--line); color:#fff; min-width:240px
 }
 
 /* Split vertical (reveal) */
