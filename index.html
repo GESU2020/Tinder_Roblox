@@ -1,116 +1,133 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tinder_Roblox - Comparativa de Países</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Roblinder · Tinder x Roblox</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- NAV -->
-  <nav class="navbar">
-    <ul>
-      <li><a href="#home" class="nav-link active">Inicio</a></li>
-      <li><a href="#participants" class="nav-link">Participantes</a></li>
-      <li><a href="#activities" class="nav-link">Actividades</a></li>
-      <li><a href="#peru-mexico" class="nav-link">Perú vs México</a></li>
-      <li><a href="#peru-dinamarca" class="nav-link">Perú vs Dinamarca</a></li>
-    </ul>
-  </nav>
+  <!-- Fondo dinámico -->
+  <canvas id="bgParticles" aria-hidden="true"></canvas>
 
-  <!-- INICIO -->
-  <section id="home" class="home">
-    <h2 class="section-title">Participantes</h2>
-    <div id="participantsGrid" class="participants-grid"></div>
-  </section>
+  <header>
+    <nav class="nav container" role="navigation" aria-label="Principal">
+      <a class="logo" href="#deck" aria-label="Inicio">
+        <!-- Logo con alturas responsivas (ver CSS) -->
+        <img
+          class="logo-img logo-img-new"
+          src="https://raw.githubusercontent.com/GESU2020/Tinder_Roblox/refs/heads/main/logo.png?v=3"
+          alt="Logo Roblinder"
+        />
+      </a>
+      <div class="nav-links" role="menubar">
+        <a class="btn btn-ghost" role="menuitem" href="#deck">Inicio</a>
+        <a class="btn btn-ghost" role="menuitem" href="#participantes">Participantes</a>
+        <a class="btn btn-ghost" role="menuitem" href="#actividades">Actividades</a>
 
-  <!-- PARTICIPANTES -->
-  <section id="participants" class="participants">
-    <h2 class="section-title">Conoce a los Participantes</h2>
-    <div id="participantsGrid2" class="participants-grid"></div>
-  </section>
+        <!-- START: corruption-block (nav) -->
+        <a
+          class="btn btn-ghost corrupcion-nav"
+          role="menuitem"
+          href="#corrupcion"
+          id="nav-corrupcion"
+          aria-controls="corrupcion"
+        >
+          Corrupción
+        </a>
+        <!-- END: corruption-block (nav) -->
+      </div>
+    </nav>
+  </header>
 
-  <!-- ACTIVIDADES -->
-  <section id="activities" class="activities">
-    <h2 class="section-title">Actividades</h2>
-    <div id="activitiesContainer" class="activities-container"></div>
-  </section>
+  <main class="container route-wrap">
+    <!-- INICIO / DECK -->
+    <section id="deck" class="route-section">
+      <div class="deck-shell glow" id="deckShell" aria-live="polite">
+        <div class="dots" id="dots"></div>
+        <div class="zone left" id="zoneLeft" aria-label="Anterior"></div>
+        <div class="zone right" id="zoneRight" aria-label="Siguiente"></div>
+      </div>
+      <div class="deck-cta">
+        <button class="btn" id="btnNope">NOPE</button>
+        <button class="btn btn-cta" id="btnLike">LIKE</button>
+        <button class="btn btn-ghost" id="btnOpen">Ver perfil</button>
+      </div>
+    </section>
 
-  <!-- PERÚ VS MÉXICO -->
-  <section id="peru-mexico" class="mexico-panel">
-    <h2>Perú vs México — Informe</h2>
-    <h3>Introducción</h3>
-    <p>Este informe presenta un análisis comparativo entre Perú y México en materia de corrupción institucional, transparencia pública y percepción ciudadana...</p>
-    <h3>Metodología</h3>
-    <p>El enfoque combina revisión bibliográfica 2018–2024 y análisis documental de casos representativos de políticas anticorrupción en América Latina.</p>
-    <h3>Hallazgos principales</h3>
-    <ul>
-      <li>Perú presenta altos niveles de rotación institucional y bajo control interno.</li>
-      <li>México ha implementado auditorías externas con mayor alcance ciudadano.</li>
-      <li>Ambos países enfrentan brechas de ejecución en mecanismos de sanción.</li>
-    </ul>
-    <div class="mexico-actions">
-      <button class="btn" onclick="descargarMexico()">Descargar documento</button>
+    <!-- PARTICIPANTES -->
+    <section id="participantes" class="route-section">
+      <h2 class="section-title"><span class="tag">Equipo</span> Participantes</h2>
+      <div id="peopleMasonry" class="masonry"></div>
+    </section>
+
+    <!-- ACTIVIDADES -->
+    <section id="actividades" class="route-section">
+      <div class="act-head">
+        <h2 class="section-title" style="margin:0"><span class="tag">Juego</span> Actividades a realizar</h2>
+        <div style="opacity:.8;font-size:14px">Elige cualquier actividad y responde el quiz.</div>
+      </div>
+      <div class="act-grid" id="actGrid"></div>
+    </section>
+
+    <!-- START: corruption-block (section) -->
+    <section id="corrupcion" hidden aria-labelledby="nav-corrupcion">
+      <header class="corrupcion-header">
+        <span class="pill">Corrupción</span>
+        <h2>Perú vs. México</h2>
+      </header>
+
+      <div id="corrupcion-content" class="corrupcion-content" aria-live="polite">
+        <p class="corrupcion-loading">Cargando informe…</p>
+      </div>
+
+      <div class="corrupcion-download" role="group" aria-label="Descarga y autor">
+        <a
+          id="corrupcion-download"
+          class="btn btn-cta"
+          href="https://github.com/GESU2020/Tinder_Roblox/raw/refs/heads/main/assets/downloads/Peru%20vs%20Mexico_Daira.docx"
+          download
+        >
+          Descargar documento
+        </a>
+        <span id="corrupcion-author" class="corrupcion-author" aria-live="polite"></span>
+      </div>
+    </section>
+    <!-- END: corruption-block (section) -->
+
+    <footer>© 2025 · Roblinder.</footer>
+  </main>
+
+  <!-- MODAL PERFIL (con carrusel) -->
+  <section id="perfilModal" class="modal" aria-hidden="true" aria-labelledby="perfilTitle" role="dialog">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-dialog" id="perfilDialog" tabindex="-1">
+      <button class="modal-close" id="modalClose" aria-label="Cerrar">✕</button>
+
+      <!-- Carrusel -->
+      <div class="carousel" id="carousel">
+        <button class="carousel-nav prev" id="carPrev" aria-label="Foto anterior">‹</button>
+        <div class="carousel-track" id="carTrack"></div>
+        <button class="carousel-nav next" id="carNext" aria-label="Foto siguiente">›</button>
+        <div class="carousel-dots" id="carDots"></div>
+      </div>
+
+      <!-- Ficha -->
+      <div class="profile-sheet" id="profileSheet" aria-live="polite"></div>
     </div>
   </section>
 
-  <!-- PERÚ VS DINAMARCA -->
-  <section id="peru-dinamarca" class="dinamarca">
-    <h2>Perú vs Dinamarca</h2>
-
-    <!-- Intro Video -->
-    <video autoplay muted loop playsinline class="bg-intro">
-      <source src="https://github.com/GESU2020/Tinder_Roblox/raw/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/videos/V0%20%C2%B7%20Intro.mp4" type="video/mp4">
-    </video>
-
-    <!-- GRID PRINCIPAL -->
-    <div class="dinamarca-grid">
-      <!-- IZQUIERDA -->
-      <div class="col peru">
-        <h3>Perú — Problemas</h3>
-        <ul>
-          <li>Corrupción persistente en gestión pública</li>
-          <li>Fallas en gobernanza, transparencia y rendición de cuentas</li>
-          <li>Normalización social e impunidad</li>
-          <li>Impacto en servicios, costo y confianza</li>
-          <li>Evidencia: revisión sistemática 2018–2024</li>
-        </ul>
-      </div>
-
-      <!-- CENTRO -->
-      <div class="col centro">
-        <h3>VERSUS — Estrategias</h3>
-        <ul>
-          <li>Datos abiertos 360° de compras y obras</li>
-          <li>Servicio civil meritocrático</li>
-          <li>Contraloría fuerte y auditorías con plazos</li>
-          <li>Ombudsman y protección a denunciantes</li>
-          <li>Sanción efectiva y trazabilidad</li>
-          <li>Educación cívica</li>
-          <li>Conflicto de interés regulado</li>
-          <li>Pagos electrónicos trazables</li>
-        </ul>
-      </div>
-
-      <!-- DERECHA -->
-      <div class="col dinamarca">
-        <h3>Dinamarca — Modelo</h3>
-        <ul>
-          <li>Alta integridad institucional</li>
-          <li>Burocracia meritocrática (carrera pública)</li>
-          <li>Control parlamentario y Ombudsman</li>
-          <li>Auditoría externa efectiva</li>
-          <li>Cultura cívica: confianza y cumplimiento</li>
-        </ul>
+  <!-- MODAL QUIZ (para todas las actividades) -->
+  <section id="quizModal" class="modal" aria-hidden="true" role="dialog" aria-label="Quiz">
+    <div class="modal-backdrop" id="quizBackdrop"></div>
+    <div class="modal-dialog dialog-wide">
+      <button class="modal-close" id="quizClose" aria-label="Cerrar">✕</button>
+      <div class="qf-card" id="quizCard">
+        <!-- Se inyecta dinámicamente -->
       </div>
     </div>
-
-    <!-- Video fondo -->
-    <video autoplay muted loop playsinline class="bg-loop">
-      <source src="https://github.com/GESU2020/Tinder_Roblox/raw/refs/heads/main/Corrupcion/Peru_vs_Dinamarca/videos/V2%20%C2%B7%20Fondo%20lado%20izquierdo.MP4" type="video/mp4">
-    </video>
   </section>
 
-  <script src="app.js"></script>
+  <script src="app.js" defer></script>
 </body>
 </html>
