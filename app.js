@@ -1,6 +1,6 @@
 /* =========================
    Roblinder · App (Vanilla JS)
-   (Incluye NEW v2 + FIX Perú vs México)
+   v2: títulos sobre imágenes + fondo animado VERSUS
    ========================= */
 
 /* ---------- Fondo dinámico ----------- */
@@ -42,10 +42,7 @@ function toast(msg){ const t=el('div',{class:'toast'}); t.textContent=msg; docum
 function parseHash(){ const h=(location.hash||'').replace(/^#/,''); if(!h) return {name:'',query:{}}; const [name, q] = h.split('?'); const query={}; if(q) new URLSearchParams(q).forEach((v,k)=> query[k]=v); return {name, query}; }
 function slugifyNombre(n){ return n.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^A-Za-z0-9]+/g,'_').replace(/^_+|_+$/g,''); }
 
-/* ---------- (Datos demo deck/actividades — igual que antes) ---------- */
-/* … (mantén aquí tus PEOPLE y ACTIVITIES originales si ya existían) … */
-
-/* ---------- DECK interacciones (sin cambios) ---------- */
+/* ---------- Deck (resumen) ---------- */
 let deckIdx = 0;
 const deckShell = $('#deckShell'), dotsEl = $('#dots');
 function renderDots(){ if(!dotsEl) return; dotsEl.innerHTML = (window.PEOPLE||[]).map((_,i)=>`<span class="dot ${i===deckIdx?'active':''}"></span>`).join(''); }
@@ -77,27 +74,23 @@ $('#btnLike')?.addEventListener('click', ()=>{ flash('like'); next(); });
 $('#btnNope')?.addEventListener('click', ()=>{ flash('nope'); next(); });
 $('#btnOpen')?.addEventListener('click', ()=> openProfile((window.PEOPLE||[])[deckIdx]?.id));
 
-/* ---------- PARTICIPANTES / QUIZ (igual que antes) ---------- */
-/* … tu renderParticipants(), modales, quiz … */
-
 /* ---------- Rutas ---------- */
 function handleHash(){
   const r = parseHash();
   if(r.name==='perfil'){ openProfile(r.query.id); }
   if(r.name==='actividad'){ openQuiz(r.query.id); }
   if(r.name==='corrupcion'){ corruptionOpen(true); }
-  if(r.name==='peru-vs-dinamarca'){ pvdOpen(true); }               // v1 (se mantiene)
-  if(r.name==='peru-vs-dinamarca-v2'){ pvdV2Open(true); }          // NEW v2
+  if(r.name==='peru-vs-dinamarca'){ pvdOpen(true); }               // v1 (sin menú)
+  if(r.name==='peru-vs-dinamarca-v2'){ pvdV2Open(true); }          // v2 activo
 }
 window.addEventListener('hashchange', handleHash);
 
 /* ---------- INIT ---------- */
 function init(){
   renderDeck();
-  /* renderParticipants(); renderActivities();  ← si ya estaban en tu app, déjalos */
   handleHash();
 
-  // Smooth scroll + click handlers de nav (inician audio al primer clic)
+  // Iniciar audio tras primera interacción (clic en menú)
   let audioStarted = false;
   function startBgAudioOnce(){
     if(audioStarted) return;
@@ -120,21 +113,16 @@ function init(){
         el.removeAttribute?.('hidden');
         el.scrollIntoView({behavior:'smooth'});
         if(href==='#corrupcion'){ corruptionOpen(true); }
-        if(href==='#peru-vs-dinamarca'){ pvdOpen(true); }           // v1
+        if(href==='#peru-vs-dinamarca'){ pvdOpen(true); }           // v1 (no visible en menú)
         if(href==='#peru-vs-dinamarca-v2'){ pvdV2Open(true); }      // v2
-        startBgAudioOnce();                                         // FIX 6
+        startBgAudioOnce();
       }
     });
   });
 
-  // Clicks directos por id
   $('#nav-corrupcion')?.addEventListener('click', (e)=>{
     e.preventDefault(); corruptionOpen(true);
     $('#corrupcion')?.scrollIntoView({behavior:'smooth'});
-  });
-  $('#nav-pvd')?.addEventListener('click', (e)=>{
-    e.preventDefault(); pvdOpen(true);
-    $('#peru-vs-dinamarca')?.scrollIntoView({behavior:'smooth'});
   });
   $('#nav-pvd2')?.addEventListener('click', (e)=>{
     e.preventDefault(); pvdV2Open(true);
@@ -144,41 +132,32 @@ function init(){
 init();
 
 /* ==========================================================
-   FIX 1 — Perú vs México: visor (iframe) + fallback
+   Perú vs México — visor (iframe) + fallback
    ========================================================== */
-const CORRUP_PERU_MEXICO_DOCX = "https://github.com/GESU2020/Tinder_Roblox/raw/refs/heads/main/assets/downloads/Peru%20vs%20Mexico_Daira.docx"; // si cambia, reemplázalo
+const CORRUP_PERU_MEXICO_DOCX = "https://github.com/GESU2020/Tinder_Roblox/raw/refs/heads/main/assets/downloads/Peru%20vs%20Mexico_Daira.docx";
 const OFFICE_EMBED_BASE = "https://view.officeapps.live.com/op/embed.aspx?src=";
 
-let corruptionBoot = false;
-
-function corruptionOpen(fromClick=false){
+function corruptionOpen(){
   const sec = $('#corrupcion');
   if(sec?.hasAttribute('hidden')) sec.removeAttribute('hidden');
+  try { document.title = 'Perú vs México — Informe (visor)'; } catch(_){}
 
-  // SEO básico
-  try {
-    document.title = 'Perú vs México — Informe (visor)';
-  } catch(_){}
-
-  // Enlace de descarga visible
   const aDown = $('#corrupcion-download');
   if(aDown){
     aDown.href = CORRUP_PERU_MEXICO_DOCX;
     aDown.download = 'Peru_vs_Mexico.docx';
   }
 
-  // Configurar iframe + fallback
   const ifr = $('#corrupcion-iframe');
   const fb  = $('#corrupcion-fallback');
   const fbLink = $('#corrupcion-fallback-link');
-  if(!ifr){ return; }
+  if(!ifr) return;
 
   const viewerUrl = OFFICE_EMBED_BASE + encodeURIComponent(CORRUP_PERU_MEXICO_DOCX);
   let loaded = false;
   ifr.onload = ()=>{ loaded = true; if(fb) fb.hidden = true; };
   ifr.src = viewerUrl;
 
-  // Timeout de 3s: si no carga, abrir en nueva pestaña y mostrar fallback
   setTimeout(()=>{
     if(!loaded){
       fbLink && (fbLink.href = CORRUP_PERU_MEXICO_DOCX);
@@ -189,30 +168,25 @@ function corruptionOpen(fromClick=false){
 }
 
 /* ==========================================================
-   v1 (Perú vs Dinamarca) — si existe tu lógica previa, mantenla
+   v1 (Perú vs Dinamarca) — se mantiene sin tocar (no menú)
    ========================================================== */
-function pvdOpen(/*fromClick*/){
-  // Mantén tu implementación v1 sin cambios
-}
+function pvdOpen(){ /* no-op para no romper lo existente */ }
 
 /* ==========================================================
-   NEW — v2 Perú vs Dinamarca (con fixes)
+   v2 — Perú vs Dinamarca (con títulos sobre imágenes + VERSUS con fondo)
    ========================================================== */
 const PV2_DOC_URL = "https://github.com/GESU2020/Tinder_Roblox/raw/refs/heads/main/assets/downloads/EC2_Peru%20vs%20Dinamarca.docx";
-
 let pv2Boot = false;
 
 function pvdV2Open(fromClick=false){
   const sec = $('#peru-vs-dinamarca-v2');
   if(sec?.hasAttribute('hidden')) sec.removeAttribute('hidden');
+  try { document.title = 'Perú vs Dinamarca — Roblinder'; } catch(_){}
 
-  try { document.title = 'Perú vs Dinamarca (v2) — Roblinder'; } catch(_){}
-
-  // Primera vez: enlazar animaciones y fallbacks
   if(!pv2Boot){
     pv2Boot = true;
 
-    // Split vertical (entrada): animar a sin clip-path
+    // Split vertical (entrada)
     requestAnimationFrame(()=>{
       $('#pv2-left')?.classList.add('animate');
       $('#pv2-right')?.classList.add('animate');
@@ -230,24 +204,7 @@ function pvdV2Open(fromClick=false){
       };
     }
 
-    // Stinger (V4) cuando entra el panel Versus (una vez)
-    const st = $('#pv2-v4');
-    if('IntersectionObserver' in window && st){
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(en=>{
-          if(en.isIntersecting){
-            st.style.opacity = .15;
-            st.currentTime = 0;
-            st.play().catch(()=>{});
-            st.onended = ()=>{ st.style.opacity = 0; };
-            io.disconnect();
-          }
-        });
-      }, {threshold:.35});
-      io.observe($('#pv2-versus'));
-    }
-
-    // Descargar DOCX con nombre dinámico
+    // Descarga DOCX con nombre dinámico
     $('#pv2-download')?.addEventListener('click', async ()=>{
       const input = $('#nombreIntegranteV2');
       const nombre = (input?.value || 'Gesú Billy Castañeda Ore').trim() || 'Gesú Billy Castañeda Ore';
@@ -267,6 +224,23 @@ function pvdV2Open(fromClick=false){
         document.body.appendChild(a); a.click(); a.remove();
       }
     });
+
+    /* ===== Observer del stinger en VERSUS (1 vez) ===== */
+    const vs = document.getElementById('versus-panel');
+    const stinger = document.getElementById('versus-stinger');
+    let stingerPlayed = false;
+
+    if(vs && stinger && 'IntersectionObserver' in window){
+      new IntersectionObserver(([e])=>{
+        if(e.isIntersecting && !stingerPlayed){
+          stinger.style.opacity = .18;          // leve
+          stinger.currentTime = 0;
+          stinger.play().catch(()=>{});
+          stinger.onended = ()=>{ stinger.style.opacity = 0; };
+          stingerPlayed = true;
+        }
+      },{threshold:.5}).observe(vs);
+    }
   }
 
   // Audio ambiente: tras primera interacción (clic de menú)
@@ -280,7 +254,7 @@ function pvdV2Open(fromClick=false){
 }
 
 /* ==========================================================
-   MODALES / PERFIL / QUIZ (placeholders si tu app ya los tenía)
+   MODALES / PERFIL / QUIZ (placeholders)
    ========================================================== */
 function openProfile(/*id*/){}
 function openQuiz(/*id*/){}
